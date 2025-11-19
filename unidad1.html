@@ -1,73 +1,257 @@
-
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Unidad 1 - Adquisición L1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Unit 1 - First Language Development</title>
   <style>
-    :root{ --maxw:1000px; --accent:#28a745; --bg:#f7f8fb; }
-    body{ font-family:sans-serif; background:var(--bg); margin:0; }
-    .wrap{ max-width:var(--maxw); margin:20px auto; padding:20px; }
-    .card{ background:#fff; padding:20px; border-radius:10px; margin-bottom:20px; box-shadow:0 2px 5px rgba(0,0,0,0.05); }
-    h2{ color:var(--accent); border-bottom:2px solid var(--accent); padding-bottom:5px; }
-    nav{ display:flex; gap:10px; margin-bottom:20px; }
-    nav a{ padding:10px; background:#fff; text-decoration:none; color:#333; border-radius:5px; border:1px solid #ddd; }
-    nav a.active{ background:var(--accent); color:white; border-color:var(--accent); }
-    .box{ background:#f0f8f0; padding:15px; border-left:5px solid var(--accent); margin:15px 0; }
-    .quiz-box{ border:1px dashed #ccc; padding:15px; margin-top:20px; }
+    /* --- CORE STYLES --- */
+    :root {
+      --maxw: 1000px;
+      --accent: #28a745; /* Green for Unit 1 */
+      --accent-light: #e8f5e9;
+      --bg: #f7f8fb;
+      --text: #333;
+    }
+    body { font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; background: var(--bg); color: var(--text); line-height: 1.6; }
+    .wrap { max-width: var(--maxw); margin: 20px auto; padding: 20px; }
+    
+    /* --- NAVIGATION --- */
+    nav { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+    nav a { padding: 10px 15px; background: #fff; text-decoration: none; color: #555; border-radius: 8px; border: 1px solid #ddd; font-weight: 600; transition: 0.2s; }
+    nav a:hover { background: #f0f0f0; }
+    nav a.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+    /* --- CARDS & SECTIONS --- */
+    .card { background: #fff; padding: 30px; border-radius: 12px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+    h1 { color: var(--accent); font-size: 2rem; margin-bottom: 10px; border-bottom: 3px solid var(--accent); display: inline-block; }
+    h2 { color: #2c3e50; margin-top: 30px; border-left: 5px solid var(--accent); padding-left: 15px; }
+    h3 { color: var(--accent); margin-top: 20px; font-size: 1.2rem; }
+
+    /* --- THEORIES GRID --- */
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px; }
+    .theory-card { border: 1px solid #eee; border-radius: 10px; padding: 20px; background: #fafafa; transition: transform 0.2s; }
+    .theory-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+    .theory-header { font-weight: bold; font-size: 1.1rem; color: #333; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+    .badge { background: var(--accent); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; }
+
+    /* --- STAGES TIMELINE --- */
+    .timeline { position: relative; margin: 30px 0; padding-left: 30px; border-left: 3px solid #ddd; }
+    .stage-item { position: relative; margin-bottom: 40px; }
+    .stage-item::before { content: ''; position: absolute; left: -39px; top: 0; width: 16px; height: 16px; background: var(--accent); border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 0 1px #ddd; }
+    .stage-title { font-weight: bold; font-size: 1.2rem; color: #333; }
+    .stage-age { font-size: 0.9rem; color: #777; margin-bottom: 5px; font-style: italic; }
+
+    /* --- VISUAL & VIDEO PLACEHOLDERS --- */
+    .visual-idea { background: var(--accent-light); border: 1px dashed var(--accent); padding: 15px; border-radius: 8px; margin: 15px 0; color: #444; font-size: 0.9rem; display: flex; align-items: center; gap: 10px; }
+    .visual-idea i { font-size: 1.5rem; }
+    
+    .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 10px; margin: 20px 0; background: #000; }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+    /* --- QUIZ & INTERACTION --- */
+    .quiz-box { background: #fff; border: 2px solid #eee; border-radius: 12px; padding: 25px; margin-top: 40px; }
+    .question { margin-bottom: 20px; }
+    .options label { display: block; padding: 10px; border: 1px solid #ddd; border-radius: 6px; margin-top: 5px; cursor: pointer; transition: 0.2s; }
+    .options label:hover { background: var(--accent-light); border-color: var(--accent); }
+    .options input { margin-right: 10px; }
+    .btn { background: var(--accent); color: white; border: none; padding: 12px 25px; border-radius: 6px; cursor: pointer; font-size: 1rem; font-weight: bold; }
+    .btn:hover { opacity: 0.9; }
+    .result { margin-top: 15px; font-weight: bold; }
+
+    /* --- ENVIRONMENT BOX --- */
+    .env-box { background: linear-gradient(to right, #ebf8e1, #f7fff0); padding: 20px; border-radius: 10px; border-left: 5px solid #8bc34a; }
+
+    /* Responsive */
+    @media (max-width: 600px) { .theory-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
+
 <div class="wrap">
   <nav>
-    <a href="index.html">Portada</a>
-    <a href="unidad1.html" class="active">Unidad 1</a>
-    <a href="unidad2.html">Unidad 2</a>
-    <a href="unidad3.html">Unidad 3</a>
-    <a href="unidad4.html">Unidad 4</a>
+    <a href="index.html">Home</a>
+    <a href="unidad1.html" class="active">Unit 1</a>
+    <a href="unidad2.html">Unit 2</a>
+    <a href="unidad3.html">Unit 3</a>
+    <a href="unidad4.html">Unit 4</a>
   </nav>
 
   <div class="card">
-    <h2>UNIDAD 1: Desarrollo de la Primera Lengua</h2>
-    
-    <h3>1.1 Cinco Teorías Principales</h3>
-    <ul>
-      [cite_start]<li><strong>Conductismo (Skinner):</strong> El lenguaje se aprende por imitación, repetición y refuerzo (Estímulo → Respuesta → Refuerzo) [cite: 4-9].</li>
-      [cite_start]<li><strong>Innatismo (Chomsky):</strong> Nacemos con un "LAD" (Dispositivo de Adquisición del Lenguaje) y Gramática Universal [cite: 17-20].</li>
-      [cite_start]<li><strong>Cognitivismo (Piaget):</strong> El lenguaje depende del desarrollo cognitivo; el pensamiento precede al habla [cite: 28-31].</li>
-      [cite_start]<li><strong>Interaccionismo (Bruner):</strong> Importancia de la interacción social y el "habla dirigida al niño" (Motherese) [cite: 39-42].</li>
-      [cite_start]<li><strong>Constructivismo (Vygotsky):</strong> Aprendizaje social en la "Zona de Desarrollo Próximo" (ZDP) [cite: 53-59].</li>
-    </ul>
+    <h1>UNIT 1: First Language Development</h1>
+    <p class="lead">This unit explores the five main theories of L1 acquisition, the developmental stages children go through, and the crucial role of the environment.</p>
 
-    <h3>1.2 Etapas de Adquisición</h3>
-    <div class="box">
-      <ol>
-        [cite_start]<li><strong>Prelingüística (0-12 meses):</strong> Balbuceo ("bababa") [cite: 85-90].</li>
-        [cite_start]<li><strong>Una Palabra (12-18 meses):</strong> Etapa holofrástica (una palabra = idea completa) [cite: 97-99].</li>
-        [cite_start]<li><strong>Dos Palabras (18-24 meses):</strong> Inicio de sintaxis ("Mamá ir") [cite: 106-110].</li>
-        [cite_start]<li><strong>Estructuras Complejas (24+ meses):</strong> Oraciones completas y preguntas [cite: 117-127].</li>
-      </ol>
+    <h2>1.1 Five Theories of First Language Acquisition (L1)</h2>
+    <p>How do we learn our first language? Here are the main perspectives:</p>
+
+    <div class="theory-grid">
+      <div class="theory-card">
+        <div class="theory-header"><span class="badge">1</span> Behaviorism (Skinner)</div>
+        [cite_start]<p><strong>Central Idea:</strong> Language is a learned behavior acquired through imitation, repetition, and reinforcement[cite: 241, 245].</p>
+        <ul>
+          [cite_start]<li>Learning cycle: Stimulus → Response → Reinforcement[cite: 246].</li>
+          [cite_start]<li>Example: Child says "water" → gets water → repeats word[cite: 248].</li>
+          [cite_start]<li><em>Criticism:</em> Cannot explain creativity (new sentences)[cite: 250].</li>
+        </ul>
+        <div class="visual-idea">
+           🖼️ <strong>Image Idea:</strong> A flowchart showing "Stimulus → Response → Reinforcement".
+        </div>
+      </div>
+
+      <div class="theory-card">
+        <div class="theory-header"><span class="badge">2</span> Innatism (Chomsky)</div>
+        [cite_start]<p><strong>Central Idea:</strong> Humans are born with a "Language Acquisition Device" (LAD) and Universal Grammar[cite: 255, 257].</p>
+        <ul>
+          <li>Input only triggers this biological capacity.</li>
+          [cite_start]<li>Explains "poverty of stimulus" (learning with little input)[cite: 259].</li>
+          [cite_start]<li>Example: Children saying "I goed" shows internal rule application[cite: 262].</li>
+        </ul>
+        <div class="visual-idea">
+           🧠 <strong>Image Idea:</strong> Brain diagram highlighting the "LAD".
+        </div>
+      </div>
+
+      <div class="theory-card">
+        <div class="theory-header"><span class="badge">3</span> Cognitivism (Piaget)</div>
+        <p><strong>Central Idea:</strong> Language depends on cognitive development. [cite_start]Thinking comes before speaking[cite: 266, 268].</p>
+        <ul>
+          [cite_start]<li>Children must understand a concept (e.g., time) before using its grammar (past tense)[cite: 270, 273].</li>
+        </ul>
+        <div class="visual-idea">
+           🧱 <strong>Image Idea:</strong> Child building "thought blocks" to unlock language skills.
+        </div>
+      </div>
+
+      <div class="theory-card">
+        <div class="theory-header"><span class="badge">4</span> Interactionism (Bruner)</div>
+        <p><strong>Central Idea:</strong> Language is acquired through social interaction. [cite_start]Caregivers create a LASS (Language Acquisition Support System)[cite: 277, 280].</p>
+        <ul>
+          [cite_start]<li>Use of "Motherese" (Child-Directed Speech)[cite: 279].</li>
+          [cite_start]<li>Based on routines and turn-taking[cite: 281].</li>
+        </ul>
+      </div>
+
+      <div class="theory-card">
+        <div class="theory-header"><span class="badge">5</span> Constructivism (Vygotsky)</div>
+        [cite_start]<p><strong>Central Idea:</strong> Language is constructed via social guidance within the Zone of Proximal Development (ZPD)[cite: 291].</p>
+        <ul>
+          [cite_start]<li>Scaffolding (help from a guide) is key[cite: 294].</li>
+          [cite_start]<li>Language begins as a social tool, then becomes internal thought[cite: 293].</li>
+        </ul>
+        <div class="visual-idea">
+           🪜 <strong>Image Idea:</strong> A ladder representing the ZPD (Level 1: Alone, Level 2: With help).
+        </div>
+      </div>
     </div>
 
-    <h3>1.3 El Papel del Entorno</h3>
-    <p>La familia provee el input lingüístico. [cite_start]La cantidad y calidad de conversación influyen directamente en el vocabulario del niño [cite: 167-170].</p>
+    <div style="margin-top: 30px;">
+        <h3>🎥 Suggested Video</h3>
+        <p><em>"Skinner Behaviorism explained in 2 minutes"</em> or <em>"Chomsky’s LAD in 3 minutes"</em></p>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/VIDEO_ID_HERE" title="YouTube video" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <hr style="margin: 40px 0; border: 0; border-top: 1px solid #eee;">
+
+    <h2>1.2 Stages of First Language Acquisition</h2>
+    <p>All children typically pass through these physiological and motor stages:</p>
+
+    <div class="timeline">
+      <div class="stage-item">
+        <div class="stage-title">1. Prelinguistic Stage (Babbling)</div>
+        <div class="stage-age">Approx. 0 - 12 months</div>
+        <p>Before words. [cite_start]Starts with cooing ("ooo") and moves to babbling ("bababa" or "baga")[cite: 323, 328].</p>
+        [cite_start]<p><strong>Key Feature:</strong> No real meaning yet, but practices rhythm and intonation[cite: 331].</p>
+        <div class="visual-idea">👶 <strong>Image:</strong> Baby making sounds with comic bubble "ba-ba-ba".</div>
+      </div>
+
+      <div class="stage-item">
+        <div class="stage-title">2. One-word Stage (Holophrastic)</div>
+        <div class="stage-age">Approx. 12 - 18 months</div>
+        [cite_start]<p>The child uses a single word to express a complete sentence (e.g., "Milk" = "I want milk")[cite: 336, 340].</p>
+        [cite_start]<p><strong>Phenomena:</strong> Overextension (calling all animals "dog") and Underextension[cite: 341, 342].</p>
+        <div class="visual-idea">🥛 <strong>Image:</strong> Child pointing at milk saying just "MILK".</div>
+      </div>
+
+      <div class="stage-item">
+        <div class="stage-title">3. Two-word Stage</div>
+        <div class="stage-age">Approx. 18 - 24 months</div>
+        [cite_start]<p>Combinations of two words with clear grammatical relationships (Agent + Action like "Mommy go")[cite: 345, 348].</p>
+        [cite_start]<p><strong>Key Feature:</strong> This is the real beginning of syntax[cite: 353].</p>
+      </div>
+
+      <div class="stage-item">
+        <div class="stage-title">4. Complex Structures Stage</div>
+        <div class="stage-age">24+ months (2-4 years)</div>
+        <p>Rapid expansion. [cite_start]Use of questions ("Why he sad?"), negations ("I no want"), and morphology (past tense -ed)[cite: 357, 366].</p>
+        [cite_start]<p><strong>Common Error:</strong> Overgeneralization (e.g., saying "goed" instead of "went")[cite: 369].</p>
+        <div class="visual-idea">🗣️ <strong>Image:</strong> Chart showing evolution: 1 word → 2 words → Full sentence.</div>
+      </div>
+    </div>
+
+    <hr style="margin: 40px 0; border: 0; border-top: 1px solid #eee;">
+
+    <h2>1.3 The Role of the Environment</h2>
+    <div class="env-box">
+      [cite_start]<p><strong>The Influence of Family:</strong> The family is the primary linguistic environment[cite: 404].</p>
+      <ul>
+        [cite_start]<li><strong>Input Quantity:</strong> More conversation = larger vocabulary[cite: 407].</li>
+        [cite_start]<li><strong>Input Quality:</strong> Reading aloud and varied words stimulate development[cite: 409].</li>
+        [cite_start]<li><strong>Affection:</strong> A loving environment encourages risk-taking in speech[cite: 415].</li>
+      </ul>
+    </div>
 
     <div class="quiz-box">
-      <h4>🧠 Test Rápido</h4>
-      <p>1. ¿Qué teoría propone el LAD?</p>
-      <label><input type="radio" name="q1" value="a"> Conductismo</label><br>
-      <label><input type="radio" name="q1" value="b"> Innatismo</label> (Correcta)<br>
-      <p>2. ¿En qué etapa se dice "Mamá agua" para pedir agua?</p>
-      <label><input type="radio" name="q2" value="a"> Holofrástica</label><br>
-      <label><input type="radio" name="q2" value="b"> Dos palabras</label> (Correcta)
+      <h3>🧠 Interactive Activity: Check your Knowledge</h3>
+      
+      <div class="question" id="q1">
+        <p><strong>1. Which theory claims that language is learned through Stimulus → Response → Reinforcement?</strong></p>
+        <div class="options">
+          <label><input type="radio" name="q1" value="incorrect"> Innatism (Chomsky)</label>
+          <label><input type="radio" name="q1" value="correct"> Behaviorism (Skinner)</label>
+          <label><input type="radio" name="q1" value="incorrect"> Cognitivism (Piaget)</label>
+        </div>
+      </div>
+
+      <div class="question" id="q2">
+        <p><strong>2. What is "Overgeneralization" in the Complex Structures stage?</strong></p>
+        <div class="options">
+          <label><input type="radio" name="q2" value="correct"> Applying a rule incorrectly (e.g., "I goed")</label>
+          <label><input type="radio" name="q2" value="incorrect"> Using one word for many things</label>
+          <label><input type="radio" name="q2" value="incorrect"> Refusing to speak</label>
+        </div>
+      </div>
+
+      <button class="btn" onclick="checkQuiz()">Submit Answers</button>
+      <div id="result" class="result"></div>
     </div>
 
-    <div style="margin-top:20px;">
-      <h4>Comentarios</h4>
-      <textarea id="com1" style="width:100%; padding:10px;" placeholder="Deja un comentario..."></textarea>
-      <button onclick="alert('Comentario guardado (simulado)')" style="margin-top:10px; padding:5px 10px;">Enviar</button>
-    </div>
   </div>
+
+  <footer style="text-align: center; color: #888; font-size: 0.9rem; margin-top: 20px;">
+    <p>Project: First Language Acquisition</p>
+  </footer>
 </div>
+
+<script>
+  function checkQuiz() {
+    let score = 0;
+    let total = 2;
+    
+    // Check Q1
+    let q1 = document.querySelector('input[name="q1"]:checked');
+    if(q1 && q1.value === 'correct') score++;
+
+    // Check Q2
+    let q2 = document.querySelector('input[name="q2"]:checked');
+    if(q2 && q2.value === 'correct') score++;
+
+    let resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = `You scored ${score} out of ${total}!`;
+    resultDiv.style.color = score === total ? 'green' : 'orange';
+  }
+</script>
+
 </body>
 </html>
