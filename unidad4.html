@@ -1,54 +1,252 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Unidad 4 - Enseñanza</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Unit 4 - Implications</title>
   <style>
-    :root{ --maxw:1000px; --accent:#eab308; --bg:#f7f8fb; }
-    body{ font-family:sans-serif; background:var(--bg); margin:0; }
-    .wrap{ max-width:var(--maxw); margin:20px auto; padding:20px; }
-    .card{ background:#fff; padding:20px; border-radius:10px; margin-bottom:20px; box-shadow:0 2px 5px rgba(0,0,0,0.05); }
-    h2{ color:var(--accent); border-bottom:2px solid var(--accent); padding-bottom:5px; }
-    nav{ display:flex; gap:10px; margin-bottom:20px; }
-    nav a{ padding:10px; background:#fff; text-decoration:none; color:#333; border-radius:5px; border:1px solid #ddd; }
-    nav a.active{ background:var(--accent); color:white; border-color:var(--accent); }
-    .tip{ background:#fffbe6; padding:15px; border-left:5px solid var(--accent); margin:15px 0; }
+    /* --- PRO DESIGN STYLES --- */
+    :root{
+      --maxw: 1000px;
+      --accent1: #2b7cff;
+      --accent2: #eab308; /* Gold for Unit 4 */
+      --muted:#666;
+      --card-bg:#fff;
+      --bg:#f7f8fb;
+      --radius:10px;
+      --shadow: 0 6px 18px rgba(20,20,40,0.06);
+    }
+    *{box-sizing:border-box}
+    body{
+      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin:0; background:var(--bg); color:#333; line-height: 1.6;
+    }
+    .wrap{max-width:var(--maxw);margin:28px auto;padding:20px;}
+    
+    /* NAV */
+    header.site{ margin-bottom:20px; text-align: center; }
+    nav.units{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:20px; justify-content: center; }
+    .unit-btn{
+      text-decoration: none; padding:10px 16px; border-radius:8px; background:#fff; border:1px solid #eee;
+      color: #444; font-weight:600; transition: all 0.2s ease;
+    }
+    .unit-btn:hover{ background: #f9f9f9; transform: translateY(-2px); }
+    .unit-btn.active{ background:var(--accent2); color:#fff; border-color:var(--accent2); box-shadow: 0 4px 12px rgba(234, 179, 8, 0.3); }
+
+    /* CONTENT */
+    .card{ background:var(--card-bg); border-radius:var(--radius); padding:30px; box-shadow:var(--shadow); margin-bottom:24px; }
+    .grid{ display:grid; grid-template-columns: 2fr 1fr; gap:30px; }
+
+    h2.unit-title{ color:var(--accent2); border-bottom: 2px solid #eee; padding-bottom: 15px; margin-top: 0; }
+    h3 { color: #2c3e50; margin-top: 40px; border-left: 5px solid var(--accent2); padding-left: 15px; font-size: 1.4rem; }
+    h4 { color: var(--accent2); margin-top: 25px; margin-bottom: 10px; }
+
+    /* BOXES */
+    .implication-box { background: #fffbeb; border: 1px solid #fceeb5; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+    .teacher-tip { background: #fff; border-left: 4px solid var(--accent2); padding: 15px; margin: 10px 0; font-style: italic; color: #555; }
+
+    /* VIDEO */
+    .video-container {
+        position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; margin-top: 10px; background: #000;
+    }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+    /* TABLES */
+    table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+    th, td { padding: 12px; border: 1px solid #eee; text-align: left; }
+    th { background: var(--accent2); color: white; }
+    tr:nth-child(even) { background: #fcfcfc; }
+
+    /* QUIZ */
+    .quiz-container { background: #fff; border: 2px solid #fcf3cf; border-radius: 10px; padding: 30px; margin-top: 40px; }
+    .quiz-question { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+    .quiz-question p { font-weight: bold; margin-bottom: 10px; }
+    .quiz-options label { display: block; padding: 8px; cursor: pointer; }
+    .quiz-options label:hover { background: #fffbeb; }
+    .btn-quiz { background: var(--accent2); color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+
+    @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+    footer { text-align: center; color: var(--muted); font-size: 0.9rem; margin-top: 40px; }
   </style>
 </head>
 <body>
+
 <div class="wrap">
-  <nav>
-    <a href="index.html">Portada</a>
-    <a href="unidad1.html">Unidad 1</a>
-    <a href="unidad2.html">Unidad 2</a>
-    <a href="unidad3.html">Unidad 3</a>
-    <a href="unidad4.html" class="active">Unidad 4</a>
+  
+  <header class="site">
+    <h1>Final Project: Language Acquisition</h1>
+  </header>
+
+  <nav class="units">
+    <a href="index.html" class="unit-btn">Cover</a>
+    <a href="unidad1.html" class="unit-btn">Unit 1</a>
+    <a href="unidad2.html" class="unit-btn">Unit 2</a>
+    <a href="unidad3.html" class="unit-btn">Unit 3</a>
+    <a href="unidad4.html" class="unit-btn active">Unit 4</a>
   </nav>
 
-  <div class="card">
-    <h2>UNIDAD 4: Implicaciones Pedagógicas</h2>
-    
-    <h3>4.1 Estrategias para el Maestro</h3>
-    <ul>
-      [cite_start]<li><strong>Adaptación:</strong> Usar juegos para niños; relevancia y metas claras para adultos [cite: 388-393].</li>
-      [cite_start]<li><strong>Feedback:</strong> Corregir suavemente sin interrumpir (ej. "Recasts": repetir la frase correctamente) [cite: 410-412].</li>
-    </ul>
+  <main class="card">
+    <h2 class="unit-title">UNIT 4 – Implications for Teaching</h2>
 
-    <h3>4.2 Aplicaciones Prácticas</h3>
-    <div class="tip">
-      [cite_start]<strong>Consejo:</strong> Usa materiales auténticos (videos reales, menús) y fomenta tareas donde el alumno deba resolver problemas usando el idioma (Task-Based Learning) [cite: 421-431].
+    <div class="grid">
+      <div class="content">
+        
+        <h3>4.1 Pedagogical Implications</h3>
+        
+        <div class="implication-box">
+            <h4>1. Understand Acquisition</h4>
+            <p>Teachers must balance implicit (natural) and explicit (studied) processes. [cite_start]Plan activities: Input → Comprehension → Production [cite: 379-385].</p>
+        </div>
+
+        <div class="implication-box">
+            <h4>2. Adapt to Students</h4>
+            <ul>
+                <li><strong>Children:</strong> Games, songs.</li>
+                <li><strong>Teens:</strong> Relevance to identity.</li>
+                [cite_start]<li><strong>Adults:</strong> Explicit goals and explanations [cite: 388-393].</li>
+            </ul>
+        </div>
+
+        <div class="implication-box">
+            <h4>3. Input, Interaction & Feedback</h4>
+            <p>Use visual aids. Provide opportunities for interaction (pairs/groups). [cite_start]Offer immediate, non-punitive feedback [cite: 404-418].</p>
+        </div>
+
+        <h3>4.2 Practical Applications</h3>
+        
+        <h4>✅ Tips for Teachers</h4>
+        <ul>
+            <li><strong>Authentic Materials:</strong> Real videos, menus, songs.</li>
+            <li><strong>Encourage Output:</strong> Debates, presentations.</li>
+            <li><strong>Scaffolding:</strong> Sentence starters, models.</li>
+            [cite_start]<li><strong>Low Affective Filter:</strong> Safe environment [cite: 421-426].</li>
+        </ul>
+
+        <h4>🏫 Activities (SLA Theories)</h4>
+        <ul>
+            <li><strong>Role Plays:</strong> Negotiation of meaning.</li>
+            <li><strong>Task-Based Learning:</strong> Solve a mystery or plan a trip.</li>
+            [cite_start]<li><strong>Noticing:</strong> Highlighting grammar in texts [cite: 427-432].</li>
+        </ul>
+
+        <h3>Errors & Feedback</h3>
+        <table>
+            <tr>
+                <th>Type</th>
+                <th>Example</th>
+            </tr>
+            <tr>
+                <td><strong>Recast</strong></td>
+                <td>Student: "He go." / Teacher: "Yes, he goes."</td>
+            </tr>
+            <tr>
+                <td><strong>Explicit</strong></td>
+                <td>"You should say went."</td>
+            </tr>
+            <tr>
+                <td><strong>Clarification</strong></td>
+                <td>"Sorry, did you mean...?"</td>
+            </tr>
+        </table>
+
+      </div>
+
+      <aside>
+        <div style="background:#fff; border:1px solid #ddd; padding:15px; border-radius:8px;">
+          <h4>🎥 Suggested Video</h4>
+          <p><strong>Topic:</strong> Corrective Feedback in the Classroom</p>
+          <div class="video-container">
+             <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
+          </div>
+          <p style="font-size:0.8rem; color:#666; margin-top:5px;">How to correct without discouraging students.</p>
+        </div>
+
+        <div class="implication-box" style="margin-top:20px; background:#fff;">
+            <h4>Common Errors</h4>
+            <ul style="padding-left:15px; font-size:0.9rem;">
+                <li>"He go" (3rd person).</li>
+                <li>"I am agree" (False friend).</li>
+                <li>"She have" (Agreement).</li>
+            </ul>
+        </div>
+      </aside>
     </div>
 
-    <h3>4.3 Actividad de Cierre</h3>
-    <p>Reflexiona: ¿Cómo aplicarías la teoría de Vygotsky (ZDP) en una clase de inglés para principiantes?</p>
-    <textarea style="width:100%; height:80px;"></textarea>
-    <br>
-    <button onclick="alert('Gracias por completar el curso!')" style="margin-top:10px; padding:10px; background:var(--accent); color:white; border:none;">Finalizar Curso</button>
-  </div>
+    <div class="quiz-container">
+        <h3 style="margin-top:0; color:var(--accent2);">📝 Unit 4 Quiz: Test Your Knowledge</h3>
+
+        <div class="quiz-question">
+            <p>1. What is a "Recast"?</p>
+            <div class="quiz-options">
+                <label><input type="radio" name="q1" value="a"> Punishing the student for an error</label>
+                <label><input type="radio" name="q1" value="b"> Repeating what the student said correctly [Correct]</label>
+                <label><input type="radio" name="q1" value="c"> Ignoring the student completely</label>
+            </div>
+        </div>
+
+        <div class="quiz-question">
+            <p>2. Which group prefers "Clear explanations and explicit goals"?</p>
+            <div class="quiz-options">
+                <label><input type="radio" name="q2" value="a"> Adults [Correct]</label>
+                <label><input type="radio" name="q2" value="b"> Children</label>
+                <label><input type="radio" name="q2" value="c"> Teenagers</label>
+            </div>
+        </div>
+
+        <div class="quiz-question">
+            <p>3. What is the main goal of "Task-Based Learning"?</p>
+            <div class="quiz-options">
+                <label><input type="radio" name="q3" value="a"> Memorizing lists of verbs</label>
+                <label><input type="radio" name="q3" value="b"> Solving a real problem using the language [Correct]</label>
+                <label><input type="radio" name="q3" value="c"> Translating texts silently</label>
+            </div>
+        </div>
+
+        <div class="quiz-question">
+            <p>4. Keeping the "Affective Filter" low means:</p>
+            <div class="quiz-options">
+                <label><input type="radio" name="q4" value="a"> Making the exam very difficult</label>
+                <label><input type="radio" name="q4" value="b"> Creating a safe environment without fear of errors [Correct]</label>
+                <label><input type="radio" name="q4" value="c"> Speaking very quietly</label>
+            </div>
+        </div>
+
+        <div class="quiz-question">
+            <p>5. Using real menus, videos, and news in class is called using:</p>
+            <div class="quiz-options">
+                <label><input type="radio" name="q5" value="a"> Authentic Materials [Correct]</label>
+                <label><input type="radio" name="q5" value="b"> Artificial Materials</label>
+                <label><input type="radio" name="q5" value="c"> Scaffolding</label>
+            </div>
+        </div>
+
+        <button class="btn-quiz" onclick="checkQuiz()">Check Answers</button>
+        <div id="result" style="margin-top:15px; font-weight:bold;"></div>
+    </div>
+
+  </main>
   
-  <div style="text-align:center; margin-top:20px;">
-      <a href="index.html">Volver al Inicio</a>
-  </div>
+  <footer>
+    <p>Final Project 2025 - Language Acquisition</p>
+  </footer>
+
 </div>
+
+<script>
+  function checkQuiz() {
+    let score = 0;
+    // Answers: 1=b, 2=a, 3=b, 4=b, 5=a
+    if(document.querySelector('input[name="q1"]:checked')?.value === 'b') score++;
+    if(document.querySelector('input[name="q2"]:checked')?.value === 'a') score++;
+    if(document.querySelector('input[name="q3"]:checked')?.value === 'b') score++;
+    if(document.querySelector('input[name="q4"]:checked')?.value === 'b') score++;
+    if(document.querySelector('input[name="q5"]:checked')?.value === 'a') score++;
+
+    let msg = document.getElementById('result');
+    msg.innerText = `You got ${score} out of 5 correct!`;
+    msg.style.color = score >= 4 ? 'green' : 'orange';
+  }
+</script>
+
 </body>
 </html>

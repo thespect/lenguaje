@@ -1,54 +1,273 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Unidad 2 - Bilingüismo</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Unit 2 - Bilingual and Second Language Acquisition</title>
   <style>
-    :root{ --maxw:1000px; --accent:#ff6f3c; --bg:#f7f8fb; }
-    body{ font-family:sans-serif; background:var(--bg); margin:0; }
-    .wrap{ max-width:var(--maxw); margin:20px auto; padding:20px; }
-    .card{ background:#fff; padding:20px; border-radius:10px; margin-bottom:20px; box-shadow:0 2px 5px rgba(0,0,0,0.05); }
-    h2{ color:var(--accent); border-bottom:2px solid var(--accent); padding-bottom:5px; }
-    nav{ display:flex; gap:10px; margin-bottom:20px; }
-    nav a{ padding:10px; background:#fff; text-decoration:none; color:#333; border-radius:5px; border:1px solid #ddd; }
-    nav a.active{ background:var(--accent); color:white; border-color:var(--accent); }
-    .highlight{ background:#fff5e6; padding:10px; border-radius:5px; }
+    /* --- PRO DESIGN STYLES --- */
+    :root{
+      --maxw: 1000px;
+      --accent1: #2b7cff;
+      --accent2: #ff6f3c; /* Color Naranja para Unidad 2 */
+      --muted:#666;
+      --card-bg:#fff;
+      --bg:#f7f8fb;
+      --radius:10px;
+      --shadow: 0 6px 18px rgba(20,20,40,0.06);
+    }
+    *{box-sizing:border-box}
+    body{
+      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin:0; background:var(--bg); color:#333; line-height: 1.6;
+    }
+    .wrap{max-width:var(--maxw);margin:28px auto;padding:20px;}
+    
+    /* HEADER & NAV */
+    header.site{ margin-bottom:20px; text-align: center; }
+    nav.units{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:20px; justify-content: center; }
+    .unit-btn{
+      text-decoration: none; padding:10px 16px; border-radius:8px; background:#fff; border:1px solid #eee;
+      color: #444; font-weight:600; transition: all 0.2s ease;
+    }
+    .unit-btn:hover{ background: #f9f9f9; transform: translateY(-2px); }
+    .unit-btn.active{ background:var(--accent2); color:#fff; border-color:var(--accent2); box-shadow: 0 4px 12px rgba(255, 111, 60, 0.3); }
+
+    /* CARDS & CONTENT */
+    .card{ background:var(--card-bg); border-radius:var(--radius); padding:30px; box-shadow:var(--shadow); margin-bottom:24px; }
+    .grid{ display:grid; grid-template-columns: 2fr 1fr; gap:30px; }
+    
+    h2.unit-title{ color:var(--accent2); border-bottom: 2px solid #eee; padding-bottom: 15px; margin-top: 0; }
+    h3 { color: #2c3e50; margin-top: 30px; border-left: 5px solid var(--accent2); padding-left: 15px; font-size: 1.4rem; }
+    h4 { color: var(--accent2); margin-top: 20px; margin-bottom: 10px; font-size: 1.1rem; }
+    
+    ul, ol { padding-left: 20px; margin-bottom: 15px; }
+    li { margin-bottom: 8px; }
+    p { margin-bottom: 15px; }
+
+    /* BOXES */
+    .box{ background:#fff9f7; padding:20px; border-radius:8px; border: 1px solid #ffecd9; margin-bottom: 20px; }
+    .video-container {
+        position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; margin-top: 10px; background: #000;
+    }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+    /* POLL STYLES */
+    .poll-container { background: #fff; border: 2px dashed #ccc; border-radius: 10px; padding: 30px; margin-top: 40px; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-weight: bold; margin-bottom: 8px; color: #444; }
+    .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-family: inherit; }
+    .radio-group label { display: block; font-weight: normal; cursor: pointer; padding: 5px 0; }
+    .btn-poll { background: var(--accent2); color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 1rem; width: 100%; margin-top: 10px; }
+    .btn-poll:hover { opacity: 0.9; }
+
+    @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+    footer { text-align: center; color: var(--muted); font-size: 0.9rem; margin-top: 40px; }
   </style>
 </head>
 <body>
+
 <div class="wrap">
-  <nav>
-    <a href="index.html">Portada</a>
-    <a href="unidad1.html">Unidad 1</a>
-    <a href="unidad2.html" class="active">Unidad 2</a>
-    <a href="unidad3.html">Unidad 3</a>
-    <a href="unidad4.html">Unidad 4</a>
+  
+  <header class="site">
+    <h1>Final Project: Language Acquisition</h1>
+  </header>
+
+  <nav class="units">
+    <a href="index.html" class="unit-btn">Cover</a>
+    <a href="unidad1.html" class="unit-btn">Unit 1</a>
+    <a href="unidad2.html" class="unit-btn active">Unit 2</a>
+    <a href="unidad3.html" class="unit-btn">Unit 3</a>
+    <a href="unidad4.html" class="unit-btn">Unit 4</a>
   </nav>
 
-  <div class="card">
-    <h2>UNIDAD 2: Adquisición Bilingüe y L2</h2>
-    
-    <h3>2.1 Adquisición Simultánea</h3>
-    <p>Ocurre cuando el niño aprende dos idiomas desde el nacimiento. [cite_start]El niño pasa por las mismas etapas en ambos idiomas y desarrolla mayor flexibilidad mental [cite: 180-188].</p>
-    [cite_start]<p class="highlight"><strong>Code-Switching:</strong> Mezclar idiomas en una frase es normal y muestra competencia, no confusión[cite: 192].</p>
+  <main class="card">
+    <h2 class="unit-title">UNIT 2 – Bilingual and Second Language Acquisition</h2>
 
-    <h3>2.2 Adquisición Secuencial</h3>
-    [cite_start]<p>Aprender una segunda lengua después de establecer la primera (generalmente después de los 3 años) [cite: 200-202].</p>
-    <ul>
-      [cite_start]<li><strong>Periodo Silencioso:</strong> El alumno escucha pero no habla[cite: 208].</li>
-      [cite_start]<li><strong>Producción Temprana:</strong> Palabras sueltas y frases cortas[cite: 210].</li>
-      [cite_start]<li><strong>Transferencia:</strong> Usar reglas de la L1 en la L2 (ej. "She have") [cite: 224-225].</li>
-    </ul>
+    <div class="grid">
+      <div class="content">
+        
+        <h3>2.1 Simultaneous Acquisition</h3>
 
-    <h3>📊 Encuesta Interactiva</h3>
-    <div class="card" style="border:1px solid #eee;">
-      <p><strong>¿Qué fue lo más difícil de aprender otro idioma?</strong></p>
-      <input type="checkbox"> Pronunciación<br>
-      <input type="checkbox"> Gramática<br>
-      <input type="checkbox"> Miedo a hablar<br>
-      <button style="margin-top:10px;">Votar</button>
+        <h4>1. What does it mean?</h4>
+        [cite_start]<p>It is when a child learns two languages at the same time from birth, usually because both languages are used at home or in their everyday environment [cite: 222-223].</p>
+
+        <h4>2. How learning occurs</h4>
+        <ul>
+            <li>The child receives constant input in both languages from infancy.</li>
+            <li>They learn each language separately, not as if they were mixed together.</li>
+            [cite_start]<li>They go through the same stages as a monolingual child (babbling, one word, two words, etc.), only in two languages [cite: 224-227].</li>
+        </ul>
+
+        <h4>3. Cognitive advantages</h4>
+        <ul>
+            <li>Greater mental flexibility.</li>
+            <li>Better attention span and ability to switch between tasks.</li>
+            [cite_start]<li>Early development of metalinguistic awareness (they realize that language is a system) [cite: 228-231].</li>
+        </ul>
+
+        <h4>4. Normal characteristics</h4>
+        <ul>
+            <li>They may mix words from both languages (code-switching), but this is completely normal and shows that the child is using all their resources to communicate.</li>
+            [cite_start]<li>Vocabularies may seem smaller in each language, but the total combined vocabulary is usually equal or greater [cite: 232-234].</li>
+        </ul>
+
+        <h4>5. Important factors</h4>
+        <ul>
+            <li>Consistency in exposure (both languages should be heard regularly).</li>
+            <li>Meaningful interactions with speakers of both languages.</li>
+            [cite_start]<li>Positive reinforcement, reading, and routines in both languages [cite: 235-238].</li>
+        </ul>
+
+        <hr style="margin: 40px 0; border-top: 1px solid #eee;">
+
+        <h3>2.2 Sequential Acquisition</h3>
+
+        <h4>1. What does it mean?</h4>
+        [cite_start]<p>It is when a person begins to learn a second language after having established their first language (usually after age 3, although it can be later) [cite: 242-243].</p>
+
+        <h4>2. How learning occurs</h4>
+        <ul>
+            <li>Learning is no longer entirely natural as in L1; it combines exposure, instruction, memory, and conscious practice.</li>
+            <li>The child uses L1 as a basis for understanding L2 (mentally translating, comparing rules).</li>
+            [cite_start]<li>Learning can take place at school, in the community, in bilingual programs, or out of social necessity [cite: 244-247].</li>
+        </ul>
+
+        <h4>3. Common stages in L2 learning</h4>
+        <ol>
+            <li><strong>Silent Period:</strong> The learner listens a lot but speaks little; they try to understand first.</li>
+            <li><strong>Early Production:</strong> Short sentences, single words (e.g., “yes,” “no,” “teacher”).</li>
+            <li><strong>Emergent Speech:</strong> Simple sentences; mixing with L1.</li>
+            [cite_start]<li><strong>Intermediate & Advanced Production:</strong> Greater vocabulary, more complex structures, more fluent communication [cite: 248-256].</li>
+        </ol>
+
+        <h4>4. Influencing factors</h4>
+        <ul>
+            <li><strong>Age:</strong> The younger the learner, the easier it is to achieve natural pronunciation; older learners acquire academic vocabulary more quickly.</li>
+            <li><strong>Quantity and quality of input:</strong> More exposure = more progress.</li>
+            <li><strong>Motivation:</strong> Need, interest, personal goals.</li>
+            <li><strong>Attitude toward the language/culture:</strong> Acceptance facilitates learning; rejection or fear slows it down.</li>
+            [cite_start]<li><strong>School and family support:</strong> Modeling, reading, guided practice [cite: 257-263].</li>
+        </ul>
+
+        <h4>5. Typical characteristics</h4>
+        <ul>
+            <li><strong>Transfer or interference:</strong> The learner uses rules from L1 in L2 (e.g., “She have”).</li>
+            <li><strong>Code-switching:</strong> Mixing languages when speaking, which is normal.</li>
+            [cite_start]<li><strong>Strategic learning:</strong> The student uses memory, repetition, rules, conscious practice [cite: 264-268].</li>
+        </ul>
+
+        <h4>6. Advantages of sequential learning</h4>
+        <ul>
+            <li>Improved memory, concentration, and problem solving.</li>
+            <li>Broader cultural competencies.</li>
+            <li>Better academic performance in areas such as reading and linguistic analysis.</li>
+            [cite_start]<li>Development of metalinguistic skills (understanding how language works) [cite: 269-273].</li>
+        </ul>
+
+      </div>
+
+      <aside>
+        <div class="box">
+          <h4>🎥 Suggested Video</h4>
+          <p><strong>Topic:</strong> “How bilingual babies learn two languages at the same time”</p>
+          <p><strong>Type:</strong> Simple Animation (2–4 minutes).</p>
+          <div class="video-container">
+             <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div class="box">
+            <h4>🖼️ Visual Ideas</h4>
+            <p style="font-size:0.9rem">Images to include:</p>
+            <ul style="font-size:0.9rem; padding-left:15px;">
+                <li>Bilingual brain diagram showing flexibility.</li>
+                <li>Timeline showing Simultaneous vs Sequential age gaps.</li>
+                <li>Infographic on the "Silent Period".</li>
+            </ul>
+        </div>
+      </aside>
     </div>
-  </div>
+
+    <div class="poll-container">
+        <h3 style="border:none; padding:0; margin-top:0; color:var(--accent2);">📋 Suggested Activity: Survey or Poll</h3>
+        <p style="font-size:1.1rem; font-weight:bold; margin-bottom:20px;">Title: “Your Experience Learning Another Language”</p>
+        
+        <form id="pollForm" onsubmit="submitPoll(event)">
+            
+            <div class="form-group">
+                <label>1. At what age did you start learning a second language?</label>
+                <select>
+                    <option disabled selected>Select an option...</option>
+                    <option>Childhood (0-12)</option>
+                    <option>Adolescence (13-18)</option>
+                    <option>Adulthood (18+)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>2. What was the main reason?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="reason"> School</label>
+                    <label><input type="radio" name="reason"> Work</label>
+                    <label><input type="radio" name="reason"> Family</label>
+                    <label><input type="radio" name="reason"> Personal Interest</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>3. What has been the hardest part?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="hardest"> Pronunciation</label>
+                    <label><input type="radio" name="hardest"> Grammar</label>
+                    <label><input type="radio" name="hardest"> Vocabulary</label>
+                    <label><input type="radio" name="hardest"> Speaking in front of others</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>4. What strategies have worked best for you?</label>
+                <div class="radio-group">
+                    <label><input type="checkbox"> Watching videos</label>
+                    <label><input type="checkbox"> Language apps</label>
+                    <label><input type="checkbox"> Classes</label>
+                    <label><input type="checkbox"> Real conversations</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>5. Do you think learning another language changed the way you think or see the world?</label>
+                <select>
+                    <option>Yes</option>
+                    <option>No</option>
+                    <option>A little</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>6. What advice would you give to someone who wants to learn the same language as you?</label>
+                <textarea rows="4" placeholder="Write your advice here..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-poll">Submit Answers</button>
+        </form>
+    </div>
+
+  </main>
+  
+  <footer>
+    <p>Final Project 2025 - Language Acquisition</p>
+  </footer>
+
 </div>
+
+<script>
+  function submitPoll(e) {
+    e.preventDefault();
+    alert("Thanks for your answers! (Simulation)");
+    document.getElementById("pollForm").reset();
+  }
+</script>
+
 </body>
 </html>
