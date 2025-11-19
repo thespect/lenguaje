@@ -15,15 +15,21 @@
       --text-light: #7f8c8d;
       --bg: #f8f9fa;
       --card-bg: #ffffff;
-      --radius: 8px;
+      --radius: 12px;
       --shadow: 0 5px 15px rgba(0,0,0,0.08);
+      --shadow-hover: 0 15px 30px rgba(0,0,0,0.12);
       --transition: all 0.3s ease;
+      --transition-slow: all 0.5s ease;
     }
     
     * { 
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+    }
+    
+    html {
+      scroll-behavior: smooth;
     }
     
     body {
@@ -36,16 +42,25 @@
       flex-direction: column;
       min-height: 100vh;
       font-weight: 400;
+      overflow-x: hidden;
     }
 
     /* --- HERO SECTION - PROFESSIONAL STYLE --- */
     header.hero {
       background: linear-gradient(135deg, var(--primary) 0%, #34495e 100%);
       color: white;
-      padding: 80px 20px 60px;
+      padding: 100px 20px 80px;
       text-align: center;
       position: relative;
       overflow: hidden;
+      animation: gradientShift 10s ease infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     header.hero::before {
@@ -57,6 +72,12 @@
       bottom: 0;
       background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
       background-size: cover;
+      animation: float 20s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
     }
 
     .hero-content {
@@ -64,28 +85,55 @@
       margin: 0 auto;
       position: relative;
       z-index: 2;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     header h1 {
-      font-size: 2.8rem;
+      font-size: 3rem;
       margin: 0 0 15px 0;
       font-weight: 700;
       letter-spacing: -0.5px;
       text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      line-height: 1.2;
     }
     
     header .subtitle {
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       opacity: 0.9;
       font-weight: 300;
       margin-bottom: 10px;
+      position: relative;
+      display: inline-block;
+    }
+
+    header .subtitle::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 2px;
+      background: rgba(255,255,255,0.5);
     }
 
     .course-info {
       font-size: 1rem;
       opacity: 0.8;
-      margin-top: 20px;
+      margin-top: 30px;
       font-weight: 400;
+      letter-spacing: 1px;
     }
 
     /* --- LAYOUT --- */
@@ -105,6 +153,13 @@
       padding: 50px;
       box-shadow: var(--shadow);
       border-top: 4px solid var(--secondary);
+      transform: translateY(0);
+      transition: var(--transition-slow);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
     }
 
     .purpose-text {
@@ -113,6 +168,35 @@
       margin-bottom: 30px;
       text-align: left;
       line-height: 1.7;
+    }
+    
+    .purpose-text p {
+      margin-bottom: 20px;
+      animation: fadeIn 1s ease-out;
+      animation-fill-mode: both;
+    }
+
+    .purpose-text p:nth-child(1) {
+      animation-delay: 0.2s;
+    }
+
+    .purpose-text p:nth-child(2) {
+      animation-delay: 0.4s;
+    }
+
+    .purpose-text p:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
     
     .purpose-title {
@@ -143,7 +227,7 @@
     .nav-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
+      gap: 25px;
       margin-top: 40px;
     }
 
@@ -162,6 +246,7 @@
       text-align: center;
       position: relative;
       overflow: hidden;
+      transform: translateY(0);
     }
 
     .nav-card::before {
@@ -176,10 +261,22 @@
       transition: var(--transition);
     }
 
+    .nav-card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to bottom, rgba(52, 152, 219, 0.05), transparent);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
     .nav-card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-8px);
       background: white;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      box-shadow: var(--shadow-hover);
       border-color: #dee2e6;
     }
 
@@ -187,10 +284,20 @@
       transform: scaleX(1);
     }
 
+    .nav-card:hover::after {
+      opacity: 1;
+    }
+
     .nav-icon { 
       font-size: 2.2rem; 
       margin-bottom: 15px; 
       color: var(--secondary);
+      transition: var(--transition);
+      display: inline-block;
+    }
+
+    .nav-card:hover .nav-icon {
+      transform: scale(1.1);
     }
 
     /* --- AUTHOR FOOTER - MORE ELEGANT --- */
@@ -203,6 +310,9 @@
       justify-content: center;
       gap: 20px;
       text-align: left;
+      animation: fadeIn 1s ease-out;
+      animation-delay: 0.8s;
+      animation-fill-mode: both;
     }
 
     .author-avatar {
@@ -217,6 +327,12 @@
       color: white;
       background: linear-gradient(to right, var(--primary), var(--secondary));
       flex-shrink: 0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: var(--transition);
+    }
+
+    .author-section:hover .author-avatar {
+      transform: rotate(5deg) scale(1.05);
     }
 
     .author-info strong { 
@@ -257,12 +373,29 @@
       border: none;
       cursor: pointer;
       letter-spacing: 0.5px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn-start::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: 0.5s;
     }
     
     .btn-start:hover { 
       transform: translateY(-2px);
       box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
       background: #2980b9;
+    }
+    
+    .btn-start:hover::before {
+      left: 100%;
     }
 
     /* Footer */
@@ -273,6 +406,28 @@
       font-size: 0.85rem;
       background: #f1f3f5;
       margin-top: auto;
+    }
+
+    /* Section Title */
+    .section-title {
+      color: var(--primary);
+      margin-top: 40px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 600;
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    .section-title::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 2px;
+      background: var(--secondary);
     }
 
     /* Responsive */
@@ -288,6 +443,10 @@
       .author-section {
         flex-direction: column;
         text-align: center;
+      }
+      
+      .nav-grid {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -316,7 +475,7 @@
         <p>Here, teachers, students, and language enthusiasts will find clear explanations, useful strategies, and activities grounded in Second Language Acquisition (SLA) research. The goal is to connect theory with everyday practice, making language learning more effective, engaging, and meaningful for everyone.</p>
       </div>
 
-      <h3 style="color: var(--primary); margin-top: 40px; text-align: center; font-weight: 600;">Explore the Units</h3>
+      <h3 class="section-title">Explore the Units</h3>
       <div class="nav-grid">
         <a href="unidad1.html" class="nav-card">
           <span class="nav-icon">🌱</span>
