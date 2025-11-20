@@ -1,252 +1,688 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Unit 4 - Implications</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+
   <style>
-    /* --- PRO DESIGN STYLES --- */
-    :root{
-      --maxw: 1000px;
-      --accent1: #2b7cff;
-      --accent2: #eab308; /* Gold for Unit 4 */
-      --muted:#666;
-      --card-bg:#fff;
-      --bg:#f7f8fb;
-      --radius:10px;
-      --shadow: 0 6px 18px rgba(20,20,40,0.06);
+    /* --- PINK & BLUE THEME (PREMIUM) --- */
+    :root {
+      /* Pink & Blue Palette */
+      --primary: #ec4899;
+      /* Pink 500 */
+      --primary-dark: #be185d;
+      /* Pink 700 */
+      --secondary: #3b82f6;
+      /* Blue 500 */
+      --secondary-dark: #1d4ed8;
+      /* Blue 700 */
+      --accent: #8b5cf6;
+      /* Violet 500 (Bridge color) */
+
+      --bg-body: #fdf4ff;
+      /* Very light pink/blue tint */
+      --bg-card: #ffffff;
+
+      --text-main: #1e293b;
+      /* Slate 800 */
+      --text-muted: #64748b;
+      /* Slate 500 */
+      --text-light: #94a3b8;
+
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    *{box-sizing:border-box}
-    body{
-      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      margin:0; background:var(--bg); color:#333; line-height: 1.6;
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-    .wrap{max-width:var(--maxw);margin:28px auto;padding:20px;}
-    
-    /* NAV */
-    header.site{ margin-bottom:20px; text-align: center; }
-    nav.units{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:20px; justify-content: center; }
-    .unit-btn{
-      text-decoration: none; padding:10px 16px; border-radius:8px; background:#fff; border:1px solid #eee;
-      color: #444; font-weight:600; transition: all 0.2s ease;
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
-    .unit-btn:hover{ background: #f9f9f9; transform: translateY(-2px); }
-    .unit-btn.active{ background:var(--accent2); color:#fff; border-color:var(--accent2); box-shadow: 0 4px 12px rgba(234, 179, 8, 0.3); }
 
-    /* CONTENT */
-    .card{ background:var(--card-bg); border-radius:var(--radius); padding:30px; box-shadow:var(--shadow); margin-bottom:24px; }
-    .grid{ display:grid; grid-template-columns: 2fr 1fr; gap:30px; }
+    /* --- HERO SECTION --- */
+    header.hero {
+      background: linear-gradient(135deg, #be185d 0%, #1e3a8a 100%);
+      position: relative;
+      padding: 120px 20px 160px;
+      text-align: center;
+      color: white;
+      overflow: hidden;
+      margin-bottom: -80px;
+      /* Overlap effect */
+    }
 
-    h2.unit-title{ color:var(--accent2); border-bottom: 2px solid #eee; padding-bottom: 15px; margin-top: 0; }
-    h3 { color: #2c3e50; margin-top: 40px; border-left: 5px solid var(--accent2); padding-left: 15px; font-size: 1.4rem; }
-    h4 { color: var(--accent2); margin-top: 25px; margin-bottom: 10px; }
+    /* Abstract Shapes */
+    header.hero::before,
+    header.hero::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.5;
+      z-index: 0;
+    }
 
-    /* BOXES */
-    .implication-box { background: #fffbeb; border: 1px solid #fceeb5; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
-    .teacher-tip { background: #fff; border-left: 4px solid var(--accent2); padding: 15px; margin: 10px 0; font-style: italic; color: #555; }
+    header.hero::before {
+      width: 300px;
+      height: 300px;
+      background: var(--primary);
+      top: -50px;
+      left: -50px;
+      animation: float 8s ease-in-out infinite;
+    }
 
-    /* VIDEO */
+    header.hero::after {
+      width: 400px;
+      height: 400px;
+      background: var(--secondary);
+      bottom: -50px;
+      right: -50px;
+      animation: float 12s ease-in-out infinite reverse;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translate(0, 0);
+      }
+
+      50% {
+        transform: translate(20px, 40px);
+      }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      margin-bottom: 10px;
+      background: linear-gradient(to right, #fff, #fbcfe8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero .meta {
+      font-size: 1.2rem;
+      color: #e2e8f0;
+      font-weight: 300;
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 5px 15px;
+      border-radius: 50px;
+      backdrop-filter: blur(5px);
+    }
+
+    /* --- NAVIGATION --- */
+    nav.units {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 20px;
+      position: relative;
+      z-index: 20;
+    }
+
+    .unit-btn {
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: var(--transition);
+      backdrop-filter: blur(5px);
+    }
+
+    .unit-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .unit-btn.active {
+      background: white;
+      color: var(--primary);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    /* --- MAIN LAYOUT --- */
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+      position: relative;
+      z-index: 20;
+      flex: 1;
+    }
+
+    .main-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: var(--shadow-xl);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .main-card {
+        padding: 25px;
+      }
+    }
+
+    /* --- TYPOGRAPHY & CONTENT --- */
+    h2.unit-title {
+      font-family: var(--font-heading);
+      color: var(--primary-dark);
+      font-size: 2rem;
+      margin-bottom: 10px;
+      display: none;
+      /* Hidden because it's in Hero now */
+    }
+
+    h3 {
+      font-family: var(--font-heading);
+      color: var(--secondary-dark);
+      font-size: 1.5rem;
+      margin: 30px 0 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h3::before {
+      content: '';
+      display: block;
+      width: 8px;
+      height: 24px;
+      background: var(--secondary);
+      border-radius: 4px;
+    }
+
+    h4 {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      color: var(--primary);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    p {
+      margin-bottom: 15px;
+      color: var(--text-muted);
+    }
+
+    ul,
+    ol {
+      margin-bottom: 20px;
+      padding-left: 25px;
+      color: var(--text-muted);
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .implication-box {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      padding: 25px;
+      border-radius: var(--radius-md);
+      margin-bottom: 25px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .implication-box:hover {
+      border-color: var(--primary);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .implication-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--primary), var(--secondary));
+    }
+
+    /* --- TABLES --- */
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin-top: 15px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+    }
+
+    th,
+    td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    th {
+      background: var(--secondary);
+      color: white;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    /* --- SIDEBAR --- */
+    aside h2 {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      color: var(--text-main);
+      margin-bottom: 15px;
+      border-bottom: 2px solid #f1f5f9;
+      padding-bottom: 10px;
+    }
+
     .video-container {
-        position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; margin-top: 10px; background: #000;
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      background: #000;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-md);
     }
-    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
-    /* TABLES */
-    table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-    th, td { padding: 12px; border: 1px solid #eee; text-align: left; }
-    th { background: var(--accent2); color: white; }
-    tr:nth-child(even) { background: #fcfcfc; }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
 
-    /* QUIZ */
-    .quiz-container { background: #fff; border: 2px solid #fcf3cf; border-radius: 10px; padding: 30px; margin-top: 40px; }
-    .quiz-question { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
-    .quiz-question p { font-weight: bold; margin-bottom: 10px; }
-    .quiz-options label { display: block; padding: 8px; cursor: pointer; }
-    .quiz-options label:hover { background: #fffbeb; }
-    .btn-quiz { background: var(--accent2); color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+    .video-item,
+    .image-item {
+      margin-bottom: 20px;
+      transition: var(--transition);
+    }
 
-    @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
-    footer { text-align: center; color: var(--muted); font-size: 0.9rem; margin-top: 40px; }
+    .video-item:hover,
+    .image-item:hover {
+      transform: scale(1.02);
+    }
+
+    .video-item img,
+    .image-item img {
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      width: 100%;
+      display: block;
+    }
+
+    .video-item p,
+    .image-item p {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-top: 8px;
+      color: var(--text-main);
+      text-align: center;
+    }
+
+    /* --- QUIZ --- */
+    .quiz-container {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      margin-top: 40px;
+    }
+
+    .quiz-question {
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px dashed #e2e8f0;
+    }
+
+    .quiz-question p {
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+
+    .quiz-options label {
+      display: block;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+      border: 1px solid transparent;
+    }
+
+    .quiz-options label:hover {
+      background: #f0f9ff;
+      border-color: #bae6fd;
+    }
+
+    .quiz-options input {
+      margin-right: 10px;
+      accent-color: var(--primary);
+    }
+
+    .btn-quiz {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      width: 100%;
+      margin-top: 10px;
+      font-family: var(--font-heading);
+      box-shadow: 0 4px 10px rgba(236, 72, 153, 0.3);
+      transition: var(--transition);
+    }
+
+    .btn-quiz:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(236, 72, 153, 0.4);
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-top: auto;
+    }
   </style>
 </head>
+
 <body>
 
-<div class="wrap">
-  
-  <header class="site">
-    <h1>Final Project: Language Acquisition</h1>
+  <header class="hero">
+    <div class="hero-content">
+      <h1>Final Project: Language Acquisition</h1>
+      <span class="meta">Unit 4 – Implications for Teaching</span>
+
+      <nav class="units">
+        <a href="index.html" class="unit-btn">cover page</a>
+        <a href="unidad1.html" class="unit-btn">Unit 1</a>
+        <a href="unidad2.html" class="unit-btn">Unit 2</a>
+        <a href="unidad3.html" class="unit-btn">Unit 3</a>
+        <a href="unidad4.html" class="unit-btn active">Unit 4</a>
+      </nav>
+    </div>
   </header>
 
-  <nav class="units">
-    <a href="index.html" class="unit-btn">Cover</a>
-    <a href="unidad1.html" class="unit-btn">Unit 1</a>
-    <a href="unidad2.html" class="unit-btn">Unit 2</a>
-    <a href="unidad3.html" class="unit-btn">Unit 3</a>
-    <a href="unidad4.html" class="unit-btn active">Unit 4</a>
-  </nav>
+  <div class="wrap">
+    <div class="main-card">
 
-  <main class="card">
-    <h2 class="unit-title">UNIT 4 – Implications for Teaching</h2>
+      <h2 class="unit-title" style="display:none;">UNIT 4 – Implications for Teaching</h2>
 
-    <div class="grid">
-      <div class="content">
-        
-        <h3>4.1 Pedagogical Implications</h3>
-        
-        <div class="implication-box">
+      <div class="grid">
+
+        <!-- LEFT: CONTENT -->
+        <div class="content">
+
+          <h3>4.1 Pedagogical Implications</h3>
+
+          <div class="implication-box">
             <h4>1. Understand Acquisition</h4>
-            <p>Teachers must balance implicit (natural) and explicit (studied) processes. [cite_start]Plan activities: Input → Comprehension → Production [cite: 379-385].</p>
-        </div>
+            <p>Teachers must balance implicit (natural) and explicit (studied) processes. Plan activities: Input →
+              Comprehension → Production.</p>
+          </div>
 
-        <div class="implication-box">
+          <div class="implication-box">
             <h4>2. Adapt to Students</h4>
             <ul>
-                <li><strong>Children:</strong> Games, songs.</li>
-                <li><strong>Teens:</strong> Relevance to identity.</li>
-                [cite_start]<li><strong>Adults:</strong> Explicit goals and explanations [cite: 388-393].</li>
+              <li><strong>Children:</strong> Games, songs.</li>
+              <li><strong>Teens:</strong> Relevance to identity.</li>
+              <li><strong>Adults:</strong> Explicit goals and explanations.</li>
             </ul>
-        </div>
+          </div>
 
-        <div class="implication-box">
+          <div class="implication-box">
             <h4>3. Input, Interaction & Feedback</h4>
-            <p>Use visual aids. Provide opportunities for interaction (pairs/groups). [cite_start]Offer immediate, non-punitive feedback [cite: 404-418].</p>
-        </div>
+            <p>Use visual aids. Provide opportunities for interaction (pairs/groups). Offer immediate, non-punitive
+              feedback.</p>
+          </div>
 
-        <h3>4.2 Practical Applications</h3>
-        
-        <h4>✅ Tips for Teachers</h4>
-        <ul>
+          <h3>4.2 Practical Applications</h3>
+
+          <h4>✅ Tips for Teachers</h4>
+          <ul>
             <li><strong>Authentic Materials:</strong> Real videos, menus, songs.</li>
             <li><strong>Encourage Output:</strong> Debates, presentations.</li>
             <li><strong>Scaffolding:</strong> Sentence starters, models.</li>
-            [cite_start]<li><strong>Low Affective Filter:</strong> Safe environment [cite: 421-426].</li>
-        </ul>
+            <li><strong>Low Affective Filter:</strong> Safe environment.</li>
+          </ul>
 
-        <h4>🏫 Activities (SLA Theories)</h4>
-        <ul>
+          <h4>🏫 Activities (SLA Theories)</h4>
+          <ul>
             <li><strong>Role Plays:</strong> Negotiation of meaning.</li>
             <li><strong>Task-Based Learning:</strong> Solve a mystery or plan a trip.</li>
-            [cite_start]<li><strong>Noticing:</strong> Highlighting grammar in texts [cite: 427-432].</li>
-        </ul>
+            <li><strong>Noticing:</strong> Highlighting grammar in texts.</li>
+          </ul>
 
-        <h3>Errors & Feedback</h3>
-        <table>
+          <h3>Errors & Feedback</h3>
+          <table>
             <tr>
-                <th>Type</th>
-                <th>Example</th>
+              <th>Type</th>
+              <th>Example</th>
             </tr>
             <tr>
-                <td><strong>Recast</strong></td>
-                <td>Student: "He go." / Teacher: "Yes, he goes."</td>
+              <td><strong>Recast</strong></td>
+              <td>Student: "He go." / Teacher: "Yes, he goes."</td>
             </tr>
             <tr>
-                <td><strong>Explicit</strong></td>
-                <td>"You should say went."</td>
+              <td><strong>Explicit</strong></td>
+              <td>"You should say went."</td>
             </tr>
             <tr>
-                <td><strong>Clarification</strong></td>
-                <td>"Sorry, did you mean...?"</td>
+              <td><strong>Clarification</strong></td>
+              <td>"Sorry, did you mean...?"</td>
             </tr>
-        </table>
+          </table>
 
-      </div>
+        </div>
 
-      <aside>
-        <div style="background:#fff; border:1px solid #ddd; padding:15px; border-radius:8px;">
-          <h4>🎥 Suggested Video</h4>
-          <p><strong>Topic:</strong> Corrective Feedback in the Classroom</p>
-          <div class="video-container">
-             <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
+        <!-- RIGHT: SIDEBAR -->
+        <aside>
+          <section class="suggested-videos">
+            <h2>Suggested Videos</h2>
+
+            <div class="video-list">
+              <!-- Video 1 -->
+              <div class="video-item">
+                <a href="https://www.youtube.com/watch?v=KVLTxKyxioA" target="_blank" style="text-decoration: none;">
+                  <img
+                    src="https://i.ytimg.com/vi/KVLTxKyxioA/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAtq1-0CtbQltOzcb05yvTI0E1UAw"
+                    alt="Video 1 Thumbnail" />
+                  <p>
+                    The Science of Teaching, Effective Education, and Great Schools</p>
+                </a>
+              </div>
+
+          </section>
+
+          <section class="visual-ideas">
+            <h2>Visual Ideas</h2>
+
+
+            <div class="image-item">
+              <a href="https://www.edupstairs.org/wp-content/uploads/2021/07/The-science-of-teaching.png"
+                target="_blank">
+                <img src="https://www.edupstairs.org/wp-content/uploads/2021/07/The-science-of-teaching.png"
+                  alt="The science of teaching">
+              </a>
+              <p>Effective Education</p>
+            </div>
+
+            <div class="image-item">
+              <a href="https://www.mdpi.com/sustainability/sustainability-12-00028/article_deploy/html/images/sustainability-12-00028-g002.png"
+                target="_blank">
+                <img
+                  src="https://www.mdpi.com/sustainability/sustainability-12-00028/article_deploy/html/images/sustainability-12-00028-g002.png"
+                  alt="Effective Teaching and Activities of Excellent Teachers for the Sustainable Development of Higher Design Education">
+              </a>
+              <p>Effective Teaching and Activities of Excellent Teachers for the Sustainable Development of Higher
+                Design Education</p>
+            </div>
+
+          </section>
+        </aside>
+
+      </div> <!-- End Grid -->
+
+      <!-- QUIZ -->
+      <div class="quiz-container">
+        <h3 style="border:none; padding:0; margin-top:0; color:var(--secondary);">📝 Unit 4 Quiz: Test Your Knowledge
+        </h3>
+
+        <div class="quiz-question">
+          <p>1. What is a "Recast"?</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q1" value="a"> Punishing the student for an error</label>
+            <label><input type="radio" name="q1" value="b"> Repeating what the student said correctly</label>
+            <label><input type="radio" name="q1" value="c"> Ignoring the student completely</label>
           </div>
-          <p style="font-size:0.8rem; color:#666; margin-top:5px;">How to correct without discouraging students.</p>
-        </div>
-
-        <div class="implication-box" style="margin-top:20px; background:#fff;">
-            <h4>Common Errors</h4>
-            <ul style="padding-left:15px; font-size:0.9rem;">
-                <li>"He go" (3rd person).</li>
-                <li>"I am agree" (False friend).</li>
-                <li>"She have" (Agreement).</li>
-            </ul>
-        </div>
-      </aside>
-    </div>
-
-    <div class="quiz-container">
-        <h3 style="margin-top:0; color:var(--accent2);">📝 Unit 4 Quiz: Test Your Knowledge</h3>
-
-        <div class="quiz-question">
-            <p>1. What is a "Recast"?</p>
-            <div class="quiz-options">
-                <label><input type="radio" name="q1" value="a"> Punishing the student for an error</label>
-                <label><input type="radio" name="q1" value="b"> Repeating what the student said correctly [Correct]</label>
-                <label><input type="radio" name="q1" value="c"> Ignoring the student completely</label>
-            </div>
         </div>
 
         <div class="quiz-question">
-            <p>2. Which group prefers "Clear explanations and explicit goals"?</p>
-            <div class="quiz-options">
-                <label><input type="radio" name="q2" value="a"> Adults [Correct]</label>
-                <label><input type="radio" name="q2" value="b"> Children</label>
-                <label><input type="radio" name="q2" value="c"> Teenagers</label>
-            </div>
+          <p>2. Which group prefers "Clear explanations and explicit goals"?</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q2" value="a"> Adults</label>
+            <label><input type="radio" name="q2" value="b"> Children</label>
+            <label><input type="radio" name="q2" value="c"> Teenagers</label>
+          </div>
         </div>
 
         <div class="quiz-question">
-            <p>3. What is the main goal of "Task-Based Learning"?</p>
-            <div class="quiz-options">
-                <label><input type="radio" name="q3" value="a"> Memorizing lists of verbs</label>
-                <label><input type="radio" name="q3" value="b"> Solving a real problem using the language [Correct]</label>
-                <label><input type="radio" name="q3" value="c"> Translating texts silently</label>
-            </div>
+          <p>3. What is the main goal of "Task-Based Learning"?</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q3" value="a"> Memorizing lists of verbs</label>
+            <label><input type="radio" name="q3" value="b"> Solving a real problem using the language</label>
+            <label><input type="radio" name="q3" value="c"> Translating texts silently</label>
+          </div>
         </div>
 
         <div class="quiz-question">
-            <p>4. Keeping the "Affective Filter" low means:</p>
-            <div class="quiz-options">
-                <label><input type="radio" name="q4" value="a"> Making the exam very difficult</label>
-                <label><input type="radio" name="q4" value="b"> Creating a safe environment without fear of errors [Correct]</label>
-                <label><input type="radio" name="q4" value="c"> Speaking very quietly</label>
-            </div>
+          <p>4. Keeping the "Affective Filter" low means:</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q4" value="a"> Making the exam very difficult</label>
+            <label><input type="radio" name="q4" value="b"> Creating a safe environment without fear of errors</label>
+            <label><input type="radio" name="q4" value="c"> Speaking very quietly</label>
+          </div>
         </div>
 
         <div class="quiz-question">
-            <p>5. Using real menus, videos, and news in class is called using:</p>
-            <div class="quiz-options">
-                <label><input type="radio" name="q5" value="a"> Authentic Materials [Correct]</label>
-                <label><input type="radio" name="q5" value="b"> Artificial Materials</label>
-                <label><input type="radio" name="q5" value="c"> Scaffolding</label>
-            </div>
+          <p>5. Using real menus, videos, and news in class is called using:</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q5" value="a"> Authentic Materials</label>
+            <label><input type="radio" name="q5" value="b"> Artificial Materials</label>
+            <label><input type="radio" name="q5" value="c"> Scaffolding</label>
+          </div>
         </div>
 
         <button class="btn-quiz" onclick="checkQuiz()">Check Answers</button>
-        <div id="result" style="margin-top:15px; font-weight:bold;"></div>
-    </div>
+        <div id="result" style="margin-top:15px; font-weight:bold; text-align:center;"></div>
+      </div>
 
-  </main>
-  
-  <footer>
-    <p>Final Project 2025 - Language Acquisition</p>
-  </footer>
+    </div> <!-- End Main Card -->
 
-</div>
+    <footer>
+      <p>Final Project 2025 - Language Acquisition</p>
+    </footer>
 
-<script>
-  function checkQuiz() {
-    let score = 0;
-    // Answers: 1=b, 2=a, 3=b, 4=b, 5=a
-    if(document.querySelector('input[name="q1"]:checked')?.value === 'b') score++;
-    if(document.querySelector('input[name="q2"]:checked')?.value === 'a') score++;
-    if(document.querySelector('input[name="q3"]:checked')?.value === 'b') score++;
-    if(document.querySelector('input[name="q4"]:checked')?.value === 'b') score++;
-    if(document.querySelector('input[name="q5"]:checked')?.value === 'a') score++;
+  </div> <!-- End Wrap -->
 
-    let msg = document.getElementById('result');
-    msg.innerText = `You got ${score} out of 5 correct!`;
-    msg.style.color = score >= 4 ? 'green' : 'orange';
-  }
-</script>
+  <script>
+    function checkQuiz() {
+      let score = 0;
+      // Answers: 1=b, 2=a, 3=b, 4=b, 5=a
+      if (document.querySelector('input[name="q1"]:checked')?.value === 'b') score++;
+      if (document.querySelector('input[name="q2"]:checked')?.value === 'a') score++;
+      if (document.querySelector('input[name="q3"]:checked')?.value === 'b') score++;
+      if (document.querySelector('input[name="q4"]:checked')?.value === 'b') score++;
+      if (document.querySelector('input[name="q5"]:checked')?.value === 'a') score++;
+
+      let msg = document.getElementById('result');
+      msg.innerText = `You got ${score} out of 5 correct!`;
+      msg.style.color = score >= 4 ? 'var(--secondary)' : '#ef4444';
+    }
+  </script>
 
 </body>
+
 </html>

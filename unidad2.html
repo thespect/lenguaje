@@ -1,273 +1,677 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Unit 2 - Bilingual and Second Language Acquisition</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+
   <style>
-    /* --- PRO DESIGN STYLES --- */
-    :root{
-      --maxw: 1000px;
-      --accent1: #2b7cff;
-      --accent2: #ff6f3c; /* Color Naranja para Unidad 2 */
-      --muted:#666;
-      --card-bg:#fff;
-      --bg:#f7f8fb;
-      --radius:10px;
-      --shadow: 0 6px 18px rgba(20,20,40,0.06);
-    }
-    *{box-sizing:border-box}
-    body{
-      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      margin:0; background:var(--bg); color:#333; line-height: 1.6;
-    }
-    .wrap{max-width:var(--maxw);margin:28px auto;padding:20px;}
-    
-    /* HEADER & NAV */
-    header.site{ margin-bottom:20px; text-align: center; }
-    nav.units{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:20px; justify-content: center; }
-    .unit-btn{
-      text-decoration: none; padding:10px 16px; border-radius:8px; background:#fff; border:1px solid #eee;
-      color: #444; font-weight:600; transition: all 0.2s ease;
-    }
-    .unit-btn:hover{ background: #f9f9f9; transform: translateY(-2px); }
-    .unit-btn.active{ background:var(--accent2); color:#fff; border-color:var(--accent2); box-shadow: 0 4px 12px rgba(255, 111, 60, 0.3); }
+    /* --- PINK & BLUE THEME (PREMIUM) --- */
+    :root {
+      /* Pink & Blue Palette */
+      --primary: #ec4899;
+      /* Pink 500 */
+      --primary-dark: #be185d;
+      /* Pink 700 */
+      --secondary: #3b82f6;
+      /* Blue 500 */
+      --secondary-dark: #1d4ed8;
+      /* Blue 700 */
+      --accent: #8b5cf6;
+      /* Violet 500 (Bridge color) */
 
-    /* CARDS & CONTENT */
-    .card{ background:var(--card-bg); border-radius:var(--radius); padding:30px; box-shadow:var(--shadow); margin-bottom:24px; }
-    .grid{ display:grid; grid-template-columns: 2fr 1fr; gap:30px; }
-    
-    h2.unit-title{ color:var(--accent2); border-bottom: 2px solid #eee; padding-bottom: 15px; margin-top: 0; }
-    h3 { color: #2c3e50; margin-top: 30px; border-left: 5px solid var(--accent2); padding-left: 15px; font-size: 1.4rem; }
-    h4 { color: var(--accent2); margin-top: 20px; margin-bottom: 10px; font-size: 1.1rem; }
-    
-    ul, ol { padding-left: 20px; margin-bottom: 15px; }
-    li { margin-bottom: 8px; }
-    p { margin-bottom: 15px; }
+      --bg-body: #fdf4ff;
+      /* Very light pink/blue tint */
+      --bg-card: #ffffff;
 
-    /* BOXES */
-    .box{ background:#fff9f7; padding:20px; border-radius:8px; border: 1px solid #ffecd9; margin-bottom: 20px; }
+      --text-main: #1e293b;
+      /* Slate 800 */
+      --text-muted: #64748b;
+      /* Slate 500 */
+      --text-light: #94a3b8;
+
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* --- HERO SECTION --- */
+    header.hero {
+      background: linear-gradient(135deg, #be185d 0%, #1e3a8a 100%);
+      position: relative;
+      padding: 120px 20px 160px;
+      text-align: center;
+      color: white;
+      overflow: hidden;
+      margin-bottom: -80px;
+      /* Overlap effect */
+    }
+
+    /* Abstract Shapes */
+    header.hero::before,
+    header.hero::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.5;
+      z-index: 0;
+    }
+
+    header.hero::before {
+      width: 300px;
+      height: 300px;
+      background: var(--primary);
+      top: -50px;
+      left: -50px;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    header.hero::after {
+      width: 400px;
+      height: 400px;
+      background: var(--secondary);
+      bottom: -50px;
+      right: -50px;
+      animation: float 12s ease-in-out infinite reverse;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translate(0, 0);
+      }
+
+      50% {
+        transform: translate(20px, 40px);
+      }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      margin-bottom: 10px;
+      background: linear-gradient(to right, #fff, #fbcfe8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero .meta {
+      font-size: 1.2rem;
+      color: #e2e8f0;
+      font-weight: 300;
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 5px 15px;
+      border-radius: 50px;
+      backdrop-filter: blur(5px);
+    }
+
+    /* --- NAVIGATION --- */
+    nav.units {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 20px;
+      position: relative;
+      z-index: 20;
+    }
+
+    .unit-btn {
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: var(--transition);
+      backdrop-filter: blur(5px);
+    }
+
+    .unit-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .unit-btn.active {
+      background: white;
+      color: var(--primary);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    /* --- MAIN LAYOUT --- */
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+      position: relative;
+      z-index: 20;
+      flex: 1;
+    }
+
+    .main-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: var(--shadow-xl);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .main-card {
+        padding: 25px;
+      }
+    }
+
+    /* --- TYPOGRAPHY & CONTENT --- */
+    h2.unit-title {
+      font-family: var(--font-heading);
+      color: var(--primary-dark);
+      font-size: 2rem;
+      margin-bottom: 10px;
+      display: none;
+      /* Hidden because it's in Hero now */
+    }
+
+    h3 {
+      font-family: var(--font-heading);
+      color: var(--secondary-dark);
+      font-size: 1.5rem;
+      margin: 30px 0 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h3::before {
+      content: '';
+      display: block;
+      width: 8px;
+      height: 24px;
+      background: var(--secondary);
+      border-radius: 4px;
+    }
+
+    h4 {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      color: var(--primary);
+      margin-top: 25px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-bottom: 15px;
+      color: var(--text-muted);
+    }
+
+    ul,
+    ol {
+      margin-bottom: 20px;
+      padding-left: 25px;
+      color: var(--text-muted);
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    /* --- SIDEBAR --- */
+    aside h2 {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      color: var(--text-main);
+      margin-bottom: 15px;
+      border-bottom: 2px solid #f1f5f9;
+      padding-bottom: 10px;
+    }
+
     .video-container {
-        position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; margin-top: 10px; background: #000;
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      background: #000;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-md);
     }
-    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
-    /* POLL STYLES */
-    .poll-container { background: #fff; border: 2px dashed #ccc; border-radius: 10px; padding: 30px; margin-top: 40px; }
-    .form-group { margin-bottom: 20px; }
-    .form-group label { display: block; font-weight: bold; margin-bottom: 8px; color: #444; }
-    .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-family: inherit; }
-    .radio-group label { display: block; font-weight: normal; cursor: pointer; padding: 5px 0; }
-    .btn-poll { background: var(--accent2); color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 1rem; width: 100%; margin-top: 10px; }
-    .btn-poll:hover { opacity: 0.9; }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
 
-    @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
-    footer { text-align: center; color: var(--muted); font-size: 0.9rem; margin-top: 40px; }
+    .video-item,
+    .image-item {
+      margin-bottom: 20px;
+      transition: var(--transition);
+    }
+
+    .video-item:hover,
+    .image-item:hover {
+      transform: scale(1.02);
+    }
+
+    .video-item img,
+    .image-item img {
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      width: 100%;
+      display: block;
+    }
+
+    .video-item p,
+    .image-item p {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-top: 8px;
+      color: var(--text-main);
+      text-align: center;
+    }
+
+    /* --- POLL --- */
+    .poll-container {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      margin-top: 40px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--secondary);
+    }
+
+    .radio-group label {
+      display: block;
+      font-weight: normal;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+
+    .radio-group label:hover {
+      background: #e0f2fe;
+    }
+
+    .radio-group input {
+      margin-right: 10px;
+      accent-color: var(--secondary);
+    }
+
+    .btn-poll {
+      background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      width: 100%;
+      margin-top: 10px;
+      font-family: var(--font-heading);
+      box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+      transition: var(--transition);
+    }
+
+    .btn-poll:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(59, 130, 246, 0.4);
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-top: auto;
+    }
   </style>
 </head>
+
 <body>
 
-<div class="wrap">
-  
-  <header class="site">
-    <h1>Final Project: Language Acquisition</h1>
+  <header class="hero">
+    <div class="hero-content">
+      <h1>Final Project: Language Acquisition</h1>
+      <span class="meta">Unit 2 – Bilingual and Second Language Acquisition</span>
+
+      <nav class="units">
+        <a href="index.html" class="unit-btn">cover page</a>
+        <a href="unidad1.html" class="unit-btn">Unit 1</a>
+        <a href="unidad2.html" class="unit-btn active">Unit 2</a>
+        <a href="unidad3.html" class="unit-btn">Unit 3</a>
+        <a href="unidad4.html" class="unit-btn">Unit 4</a>
+      </nav>
+    </div>
   </header>
 
-  <nav class="units">
-    <a href="index.html" class="unit-btn">Cover</a>
-    <a href="unidad1.html" class="unit-btn">Unit 1</a>
-    <a href="unidad2.html" class="unit-btn active">Unit 2</a>
-    <a href="unidad3.html" class="unit-btn">Unit 3</a>
-    <a href="unidad4.html" class="unit-btn">Unit 4</a>
-  </nav>
+  <div class="wrap">
+    <div class="main-card">
 
-  <main class="card">
-    <h2 class="unit-title">UNIT 2 – Bilingual and Second Language Acquisition</h2>
+      <h2 class="unit-title" style="display:none;">UNIT 2 – Bilingual and Second Language Acquisition</h2>
 
-    <div class="grid">
-      <div class="content">
-        
-        <h3>2.1 Simultaneous Acquisition</h3>
+      <div class="grid">
 
-        <h4>1. What does it mean?</h4>
-        [cite_start]<p>It is when a child learns two languages at the same time from birth, usually because both languages are used at home or in their everyday environment [cite: 222-223].</p>
+        <!-- LEFT: CONTENT -->
+        <div class="content">
 
-        <h4>2. How learning occurs</h4>
-        <ul>
+          <h3>2.1 Simultaneous Acquisition</h3>
+
+          <h4>1. What does it mean?</h4>
+          <p>It is when a child learns two languages at the same time from birth, usually because both languages are
+            used at home or in their everyday environment.</p>
+
+          <h4>2. How learning occurs</h4>
+          <ul>
             <li>The child receives constant input in both languages from infancy.</li>
             <li>They learn each language separately, not as if they were mixed together.</li>
-            [cite_start]<li>They go through the same stages as a monolingual child (babbling, one word, two words, etc.), only in two languages [cite: 224-227].</li>
-        </ul>
+            <li>They go through the same stages as a monolingual child (babbling, one word, two words, etc.), only in
+              two languages.</li>
+          </ul>
 
-        <h4>3. Cognitive advantages</h4>
-        <ul>
+          <h4>3. Cognitive advantages</h4>
+          <ul>
             <li>Greater mental flexibility.</li>
             <li>Better attention span and ability to switch between tasks.</li>
-            [cite_start]<li>Early development of metalinguistic awareness (they realize that language is a system) [cite: 228-231].</li>
-        </ul>
+            <li>Early development of metalinguistic awareness (they realize that language is a system).</li>
+          </ul>
 
-        <h4>4. Normal characteristics</h4>
-        <ul>
-            <li>They may mix words from both languages (code-switching), but this is completely normal and shows that the child is using all their resources to communicate.</li>
-            [cite_start]<li>Vocabularies may seem smaller in each language, but the total combined vocabulary is usually equal or greater [cite: 232-234].</li>
-        </ul>
+          <h4>4. Normal characteristics</h4>
+          <ul>
+            <li>They may mix words from both languages (code-switching), but this is completely normal and shows that
+              the child is using all their resources to communicate.</li>
+            <li>Vocabularies may seem smaller in each language, but the total combined vocabulary is usually equal or
+              greater.</li>
+          </ul>
 
-        <h4>5. Important factors</h4>
-        <ul>
+          <h4>5. Important factors</h4>
+          <ul>
             <li>Consistency in exposure (both languages should be heard regularly).</li>
             <li>Meaningful interactions with speakers of both languages.</li>
-            [cite_start]<li>Positive reinforcement, reading, and routines in both languages [cite: 235-238].</li>
-        </ul>
+            <li>Positive reinforcement, reading, and routines in both languages.</li>
+          </ul>
 
-        <hr style="margin: 40px 0; border-top: 1px solid #eee;">
+          <hr style="margin: 40px 0; border-top: 1px solid #e2e8f0;">
 
-        <h3>2.2 Sequential Acquisition</h3>
+          <h3>2.2 Sequential Acquisition</h3>
 
-        <h4>1. What does it mean?</h4>
-        [cite_start]<p>It is when a person begins to learn a second language after having established their first language (usually after age 3, although it can be later) [cite: 242-243].</p>
+          <h4>1. What does it mean?</h4>
+          <p>It is when a person begins to learn a second language after having established their first language
+            (usually after age 3, although it can be later).</p>
 
-        <h4>2. How learning occurs</h4>
-        <ul>
-            <li>Learning is no longer entirely natural as in L1; it combines exposure, instruction, memory, and conscious practice.</li>
+          <h4>2. How learning occurs</h4>
+          <ul>
+            <li>Learning is no longer entirely natural as in L1; it combines exposure, instruction, memory, and
+              conscious practice.</li>
             <li>The child uses L1 as a basis for understanding L2 (mentally translating, comparing rules).</li>
-            [cite_start]<li>Learning can take place at school, in the community, in bilingual programs, or out of social necessity [cite: 244-247].</li>
-        </ul>
+            <li>Learning can take place at school, in the community, in bilingual programs, or out of social necessity.
+            </li>
+          </ul>
 
-        <h4>3. Common stages in L2 learning</h4>
-        <ol>
-            <li><strong>Silent Period:</strong> The learner listens a lot but speaks little; they try to understand first.</li>
+          <h4>3. Common stages in L2 learning</h4>
+          <ol>
+            <li><strong>Silent Period:</strong> The learner listens a lot but speaks little; they try to understand
+              first.</li>
             <li><strong>Early Production:</strong> Short sentences, single words (e.g., “yes,” “no,” “teacher”).</li>
             <li><strong>Emergent Speech:</strong> Simple sentences; mixing with L1.</li>
-            [cite_start]<li><strong>Intermediate & Advanced Production:</strong> Greater vocabulary, more complex structures, more fluent communication [cite: 248-256].</li>
-        </ol>
+            <li><strong>Intermediate & Advanced Production:</strong> Greater vocabulary, more complex structures, more
+              fluent communication.</li>
+          </ol>
 
-        <h4>4. Influencing factors</h4>
-        <ul>
-            <li><strong>Age:</strong> The younger the learner, the easier it is to achieve natural pronunciation; older learners acquire academic vocabulary more quickly.</li>
+          <h4>4. Influencing factors</h4>
+          <ul>
+            <li><strong>Age:</strong> The younger the learner, the easier it is to achieve natural pronunciation; older
+              learners acquire academic vocabulary more quickly.</li>
             <li><strong>Quantity and quality of input:</strong> More exposure = more progress.</li>
             <li><strong>Motivation:</strong> Need, interest, personal goals.</li>
-            <li><strong>Attitude toward the language/culture:</strong> Acceptance facilitates learning; rejection or fear slows it down.</li>
-            [cite_start]<li><strong>School and family support:</strong> Modeling, reading, guided practice [cite: 257-263].</li>
-        </ul>
+            <li><strong>Attitude toward the language/culture:</strong> Acceptance facilitates learning; rejection or
+              fear slows it down.</li>
+            <li><strong>School and family support:</strong> Modeling, reading, guided practice.</li>
+          </ul>
 
-        <h4>5. Typical characteristics</h4>
-        <ul>
+          <h4>5. Typical characteristics</h4>
+          <ul>
             <li><strong>Transfer or interference:</strong> The learner uses rules from L1 in L2 (e.g., “She have”).</li>
             <li><strong>Code-switching:</strong> Mixing languages when speaking, which is normal.</li>
-            [cite_start]<li><strong>Strategic learning:</strong> The student uses memory, repetition, rules, conscious practice [cite: 264-268].</li>
-        </ul>
+            <li><strong>Strategic learning:</strong> The student uses memory, repetition, rules, conscious practice.
+            </li>
+          </ul>
 
-        <h4>6. Advantages of sequential learning</h4>
-        <ul>
+          <h4>6. Advantages of sequential learning</h4>
+          <ul>
             <li>Improved memory, concentration, and problem solving.</li>
             <li>Broader cultural competencies.</li>
             <li>Better academic performance in areas such as reading and linguistic analysis.</li>
-            [cite_start]<li>Development of metalinguistic skills (understanding how language works) [cite: 269-273].</li>
-        </ul>
+            <li>Development of metalinguistic skills (understanding how language works).</li>
+          </ul>
 
+        </div>
+
+        <!-- RIGHT: SIDEBAR -->
+        <aside>
+          <section class="suggested-videos">
+            <h2>Suggested Videos</h2>
+
+            <div class="video-list">
+              <!-- Video 1 -->
+              <div class="video-item">
+                <a href="https://www.youtube.com/watch?v=Me_v82q0ins" target="_blank" style="text-decoration: none;">
+                  <img src="https://img.youtube.com/vi/Me_v82q0ins/hqdefault.jpg" alt="Video 1 Thumbnail" />
+                  <p>How Do Babies Become Bilingual?</p>
+                </a>
+              </div>
+
+
+
+              <section class="visual-ideas">
+                <h2>Visual Ideas</h2>
+
+                <div class="image-list">
+                  <div class="image-item">
+                    <a href="https://media.licdn.com/dms/image/v2/D4E22AQHlf6nvJvpcPw/feedshare-shrink_800/B4EZYaSTg8GYAs-/0/1744197790884?e=2147483647&v=beta&t=S9nDrMGNBeiA4w5xW4JOsv-M1qG67ZemHkR4B5FGdtA"
+                      target="_blank">
+                      <img
+                        src="https://media.licdn.com/dms/image/v2/D4E22AQHlf6nvJvpcPw/feedshare-shrink_800/B4EZYaSTg8GYAs-/0/1744197790884?e=2147483647&v=beta&t=S9nDrMGNBeiA4w5xW4JOsv-M1qG67ZemHkR4B5FGdtA"
+                        alt="Bilingual in children and lenguage acquisition ">
+                    </a>
+                    <p>Bilingual in children and lenguage acquisition</p>
+                  </div>
+                  <div class="image-item">
+                    <a href="https://images.squarespace-cdn.com/content/v1/58756957cd0f689c9809480a/1493737219506-3G8I0568UQVTHVW1LKY8/image-asset.png"
+                      target="_blank">
+                      <img
+                        src="https://images.squarespace-cdn.com/content/v1/58756957cd0f689c9809480a/1493737219506-3G8I0568UQVTHVW1LKY8/image-asset.png"
+                        alt="Bilingual in children and lenguage acquisition ">
+                    </a>
+                    <p>Myth vs Fact: Bilingual lenguage acquisition</p>
+                  </div>
+                  <div class="image-item">
+                    <a href="https://multilingual-families.com/wp-content/uploads/2023/01/BFLA-and-ESLA.png"
+                      target="_blank">
+                      <img src="https://multilingual-families.com/wp-content/uploads/2023/01/BFLA-and-ESLA.png"
+                        alt="Bilingual in children and lenguage acquisition ">
+                    </a>
+                    <p>Early Simultaneous Multilinguals across the Lifespan</p>
+                  </div>
+
+              </section>
+        </aside>
+
+      </div> <!-- End Grid -->
+
+      <!-- POLL -->
+      <div class="poll-container">
+        <h3 style="border:none; padding:0; margin-top:0; color:var(--secondary);">📋 Suggested Activity: Survey or Poll
+        </h3>
+        <p style="font-size:1.1rem; font-weight:bold; margin-bottom:20px; color:var(--text-main);">Title: “Your
+          Experience Learning Another Language”</p>
+
+        <form id="pollForm" onsubmit="submitPoll(event)">
+
+          <div class="form-group">
+            <label>1. At what age did you start learning a second language?</label>
+            <select>
+              <option disabled selected>Select an option...</option>
+              <option>Childhood (0-12)</option>
+              <option>Adolescence (13-18)</option>
+              <option>Adulthood (18+)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>2. What was the main reason?</label>
+            <div class="radio-group">
+              <label><input type="radio" name="reason"> School</label>
+              <label><input type="radio" name="reason"> Work</label>
+              <label><input type="radio" name="reason"> Family</label>
+              <label><input type="radio" name="reason"> Personal Interest</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>3. What has been the hardest part?</label>
+            <div class="radio-group">
+              <label><input type="radio" name="hardest"> Pronunciation</label>
+              <label><input type="radio" name="hardest"> Grammar</label>
+              <label><input type="radio" name="hardest"> Vocabulary</label>
+              <label><input type="radio" name="hardest"> Speaking in front of others</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>4. What strategies have worked best for you?</label>
+            <div class="radio-group">
+              <label><input type="checkbox"> Watching videos</label>
+              <label><input type="checkbox"> Language apps</label>
+              <label><input type="checkbox"> Classes</label>
+              <label><input type="checkbox"> Real conversations</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>5. Do you think learning another language changed the way you think or see the world?</label>
+            <select>
+              <option>Yes</option>
+              <option>No</option>
+              <option>A little</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>6. What advice would you give to someone who wants to learn the same language as you?</label>
+            <textarea rows="4" placeholder="Write your advice here..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-poll">Submit Answers</button>
+        </form>
       </div>
 
-      <aside>
-        <div class="box">
-          <h4>🎥 Suggested Video</h4>
-          <p><strong>Topic:</strong> “How bilingual babies learn two languages at the same time”</p>
-          <p><strong>Type:</strong> Simple Animation (2–4 minutes).</p>
-          <div class="video-container">
-             <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
-          </div>
-        </div>
+    </div> <!-- End Main Card -->
 
-        <div class="box">
-            <h4>🖼️ Visual Ideas</h4>
-            <p style="font-size:0.9rem">Images to include:</p>
-            <ul style="font-size:0.9rem; padding-left:15px;">
-                <li>Bilingual brain diagram showing flexibility.</li>
-                <li>Timeline showing Simultaneous vs Sequential age gaps.</li>
-                <li>Infographic on the "Silent Period".</li>
-            </ul>
-        </div>
-      </aside>
-    </div>
+    <footer>
+      <p>Final Project 2025 - Language Acquisition</p>
+    </footer>
 
-    <div class="poll-container">
-        <h3 style="border:none; padding:0; margin-top:0; color:var(--accent2);">📋 Suggested Activity: Survey or Poll</h3>
-        <p style="font-size:1.1rem; font-weight:bold; margin-bottom:20px;">Title: “Your Experience Learning Another Language”</p>
-        
-        <form id="pollForm" onsubmit="submitPoll(event)">
-            
-            <div class="form-group">
-                <label>1. At what age did you start learning a second language?</label>
-                <select>
-                    <option disabled selected>Select an option...</option>
-                    <option>Childhood (0-12)</option>
-                    <option>Adolescence (13-18)</option>
-                    <option>Adulthood (18+)</option>
-                </select>
-            </div>
+  </div> <!-- End Wrap -->
 
-            <div class="form-group">
-                <label>2. What was the main reason?</label>
-                <div class="radio-group">
-                    <label><input type="radio" name="reason"> School</label>
-                    <label><input type="radio" name="reason"> Work</label>
-                    <label><input type="radio" name="reason"> Family</label>
-                    <label><input type="radio" name="reason"> Personal Interest</label>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>3. What has been the hardest part?</label>
-                <div class="radio-group">
-                    <label><input type="radio" name="hardest"> Pronunciation</label>
-                    <label><input type="radio" name="hardest"> Grammar</label>
-                    <label><input type="radio" name="hardest"> Vocabulary</label>
-                    <label><input type="radio" name="hardest"> Speaking in front of others</label>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>4. What strategies have worked best for you?</label>
-                <div class="radio-group">
-                    <label><input type="checkbox"> Watching videos</label>
-                    <label><input type="checkbox"> Language apps</label>
-                    <label><input type="checkbox"> Classes</label>
-                    <label><input type="checkbox"> Real conversations</label>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>5. Do you think learning another language changed the way you think or see the world?</label>
-                <select>
-                    <option>Yes</option>
-                    <option>No</option>
-                    <option>A little</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>6. What advice would you give to someone who wants to learn the same language as you?</label>
-                <textarea rows="4" placeholder="Write your advice here..."></textarea>
-            </div>
-
-            <button type="submit" class="btn-poll">Submit Answers</button>
-        </form>
-    </div>
-
-  </main>
-  
-  <footer>
-    <p>Final Project 2025 - Language Acquisition</p>
-  </footer>
-
-</div>
-
-<script>
-  function submitPoll(e) {
-    e.preventDefault();
-    alert("Thanks for your answers! (Simulation)");
-    document.getElementById("pollForm").reset();
-  }
-</script>
+  <script>
+    function submitPoll(e) {
+      e.preventDefault();
+      alert("Thanks for your answers! (Simulation)");
+      document.getElementById("pollForm").reset();
+    }
+  </script>
 
 </body>
+
 </html>

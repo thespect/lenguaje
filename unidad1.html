@@ -5,88 +5,208 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Unit 1 - First Language Development</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+
   <style>
-    /* --- DISEÑO PRO (FIXED LAYOUT) --- */
+    /* --- PINK & BLUE THEME (PREMIUM) --- */
     :root {
-      --maxw: 1000px;
-      --accent1: #2b7cff;
-      --accent2: #28a745;
-      /* Green for Unit 1 */
-      --muted: #666;
-      --card-bg: #fff;
-      --bg: #f7f8fb;
-      --radius: 10px;
-      --shadow: 0 6px 18px rgba(20, 20, 40, 0.06);
+      /* Pink & Blue Palette */
+      --primary: #ec4899;
+      /* Pink 500 */
+      --primary-dark: #be185d;
+      /* Pink 700 */
+      --secondary: #3b82f6;
+      /* Blue 500 */
+      --secondary-dark: #1d4ed8;
+      /* Blue 700 */
+      --accent: #8b5cf6;
+      /* Violet 500 (Bridge color) */
+
+      --bg-body: #fdf4ff;
+      /* Very light pink/blue tint */
+      --bg-card: #ffffff;
+
+      --text-main: #1e293b;
+      /* Slate 800 */
+      --text-muted: #64748b;
+      /* Slate 500 */
+      --text-light: #94a3b8;
+
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     * {
-      box-sizing: border-box
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      margin: 0;
-      background: var(--bg);
-      color: #333;
-      line-height: 1.6;
+      font-family: var(--font-body);
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
-    .wrap {
-      max-width: var(--maxw);
-      margin: 28px auto;
-      padding: 20px;
-    }
-
-    /* HEADER & NAV */
-    header.site {
-      margin-bottom: 20px;
+    /* --- HERO SECTION --- */
+    header.hero {
+      background: linear-gradient(135deg, #be185d 0%, #1e3a8a 100%);
+      position: relative;
+      padding: 120px 20px 160px;
       text-align: center;
+      color: white;
+      overflow: hidden;
+      margin-bottom: -80px;
+      /* Overlap effect */
     }
 
+    /* Abstract Shapes */
+    header.hero::before,
+    header.hero::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.5;
+      z-index: 0;
+    }
+
+    header.hero::before {
+      width: 300px;
+      height: 300px;
+      background: var(--primary);
+      top: -50px;
+      left: -50px;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    header.hero::after {
+      width: 400px;
+      height: 400px;
+      background: var(--secondary);
+      bottom: -50px;
+      right: -50px;
+      animation: float 12s ease-in-out infinite reverse;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translate(0, 0);
+      }
+
+      50% {
+        transform: translate(20px, 40px);
+      }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      margin-bottom: 10px;
+      background: linear-gradient(to right, #fff, #fbcfe8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero .meta {
+      font-size: 1.2rem;
+      color: #e2e8f0;
+      font-weight: 300;
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 5px 15px;
+      border-radius: 50px;
+      backdrop-filter: blur(5px);
+    }
+
+    /* --- NAVIGATION --- */
     nav.units {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 20px;
       justify-content: center;
+      margin-top: 20px;
+      position: relative;
+      z-index: 20;
     }
 
     .unit-btn {
       text-decoration: none;
-      padding: 10px 16px;
-      border-radius: 8px;
-      background: #fff;
-      border: 1px solid #eee;
-      color: #444;
+      padding: 10px 20px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
       font-weight: 600;
-      transition: all 0.2s ease;
+      font-size: 0.9rem;
+      transition: var(--transition);
+      backdrop-filter: blur(5px);
     }
 
     .unit-btn:hover {
-      background: #f9f9f9;
+      background: rgba(255, 255, 255, 0.3);
       transform: translateY(-2px);
     }
 
     .unit-btn.active {
-      background: var(--accent2);
-      color: #fff;
-      border-color: var(--accent2);
-      box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+      background: white;
+      color: var(--primary);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
-    /* LAYOUT GRID */
-    .card {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      padding: 30px;
-      box-shadow: var(--shadow);
-      margin-bottom: 24px;
+    /* --- MAIN LAYOUT --- */
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+      position: relative;
+      z-index: 20;
+      flex: 1;
+    }
+
+    .main-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: var(--shadow-xl);
     }
 
     .grid {
       display: grid;
-      grid-template-columns: 65% 32%;
-      gap: 3%;
+      grid-template-columns: 2fr 1fr;
+      gap: 40px;
       align-items: start;
     }
 
@@ -94,83 +214,123 @@
       .grid {
         grid-template-columns: 1fr;
       }
+
+      .main-card {
+        padding: 25px;
+      }
     }
 
-    /* TYPOGRAPHY */
+    /* --- TYPOGRAPHY & CONTENT --- */
     h2.unit-title {
-      color: var(--accent2);
-      border-bottom: 2px solid #eee;
-      padding-bottom: 15px;
-      margin-top: 0;
+      font-family: var(--font-heading);
+      color: var(--primary-dark);
+      font-size: 2rem;
+      margin-bottom: 10px;
+      display: none;
+      /* Hidden because it's in Hero now, but kept in DOM if needed */
     }
 
     h3 {
-      color: #2c3e50;
-      margin-top: 30px;
-      border-left: 5px solid var(--accent2);
-      padding-left: 15px;
-      font-size: 1.3rem;
+      font-family: var(--font-heading);
+      color: var(--secondary-dark);
+      font-size: 1.5rem;
+      margin: 30px 0 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h3::before {
+      content: '';
+      display: block;
+      width: 8px;
+      height: 24px;
+      background: var(--secondary);
+      border-radius: 4px;
     }
 
     h4 {
-      margin: 0 0 5px 0;
-      color: #555;
-      font-weight: 700;
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      color: var(--text-main);
+      margin-bottom: 8px;
     }
 
-    /* THEORY ITEMS */
+    p {
+      margin-bottom: 15px;
+      color: var(--text-muted);
+    }
+
+    /* --- THEORIES & STAGES --- */
     .theory-item {
-      background: #f9fff9;
-      border: 1px solid #e0f0e0;
-      padding: 15px;
-      border-radius: 8px;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      padding: 20px;
+      border-radius: var(--radius-md);
       margin-bottom: 20px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .theory-item:hover {
+      border-color: var(--primary);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .theory-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--primary);
     }
 
     .theory-item strong {
-      color: var(--accent2);
+      color: var(--primary-dark);
+      font-size: 1.15rem;
       display: block;
-      margin-bottom: 5px;
-      font-size: 1.1rem;
+      margin-bottom: 8px;
+      font-family: var(--font-heading);
     }
 
-    /* STAGE BOXES */
     .stage-box {
-      background: #fff;
-      border: 1px solid #eee;
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 15px;
-      border-left-width: 4px;
-    }
-
-    /* SIDEBAR BOXES */
-    .sidebar-box {
-      background: #f8f9fa;
+      background: linear-gradient(to right, #f8fafc, #fff);
+      border: 1px solid #e2e8f0;
       padding: 20px;
-      border-radius: 8px;
-      margin-bottom: 25px;
-      border: 1px solid #eee;
-    }
-
-    .sidebar-title {
-      color: var(--accent2);
-      margin-top: 0;
-      font-size: 1.1rem;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 10px;
+      border-radius: var(--radius-md);
       margin-bottom: 15px;
+      border-left: 5px solid var(--secondary);
     }
 
-    /* VIDEO */
+    .stage-box h4 {
+      color: var(--secondary);
+    }
+
+    /* --- SIDEBAR --- */
+    aside h2 {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      color: var(--text-main);
+      margin-bottom: 15px;
+      border-bottom: 2px solid #f1f5f9;
+      padding-bottom: 10px;
+    }
+
     .video-container {
       position: relative;
       padding-bottom: 56.25%;
       height: 0;
       overflow: hidden;
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       background: #000;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-md);
     }
 
     .video-container iframe {
@@ -182,129 +342,172 @@
       border: 0;
     }
 
-    /* QUIZ */
-    .quiz-container {
-      background: #fff;
-      border: 2px solid #e8f5e9;
-      border-radius: 8px;
-      padding: 16px;
-      margin-bottom: 16px;
+    .video-item,
+    .image-item {
+      margin-bottom: 20px;
+      transition: var(--transition);
     }
 
-    .quiz-container h5 {
-      margin: 0 0 10px 0;
-      color: #2c3e50;
+    .video-item:hover,
+    .image-item:hover {
+      transform: scale(1.02);
     }
 
-    .question {
-      margin-bottom: 12px;
-      border-bottom: 1px dashed #eee;
-      padding-bottom: 10px;
-    }
-
-    .question:last-child {
-      border-bottom: none;
-    }
-
-    .options label {
+    .video-item img,
+    .image-item img {
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      width: 100%;
       display: block;
-      padding: 8px;
-      cursor: pointer;
-      border-radius: 4px;
-      font-size: 0.92rem;
     }
 
-    .options input {
-      margin-right: 8px;
+    .video-item p,
+    .image-item p {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-top: 8px;
+      color: var(--text-main);
+      text-align: center;
     }
 
-    .options label:hover {
-      background: #f1f8e9;
-    }
-
-    .btn-primary {
-      background: var(--accent2);
-      color: white;
-      border: none;
-      padding: 10px 14px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-      width: 100%;
-      margin-top: 10px;
-    }
-
-    /* ACCORDION for quizzes list on top of sidebar */
+    /* --- QUIZ & ACCORDION --- */
     .accordion {
-      width: 100%;
-      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+      border-radius: var(--radius-md);
       overflow: hidden;
-      border: 1px solid #e6f2e9;
+      margin-bottom: 20px;
       background: #fff;
-      margin-bottom: 12px;
     }
 
     .acc-head {
+      background: #f8fafc;
+      padding: 15px 20px;
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--text-main);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 12px 16px;
-      cursor: pointer;
-      font-weight: 700;
-      color: #2c3e50;
+      transition: background 0.2s;
+    }
+
+    .acc-head:hover {
+      background: #f1f5f9;
+      color: var(--primary);
     }
 
     .acc-body {
       display: none;
-      padding: 12px 16px;
-      border-top: 1px solid #eef8ee;
-      background: #fbfffc;
+      padding: 20px;
+      border-top: 1px solid #e2e8f0;
     }
 
-    /* COMMENTS */
+    .quiz-container {
+      background: #fff;
+    }
+
+    .question {
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px dashed #e2e8f0;
+    }
+
+    .options label {
+      display: block;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+      border: 1px solid transparent;
+    }
+
+    .options label:hover {
+      background: #f0f9ff;
+      /* Light blue hover */
+      border-color: #bae6fd;
+    }
+
+    .options input {
+      margin-right: 10px;
+      accent-color: var(--primary);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 600;
+      width: 100%;
+      font-family: var(--font-heading);
+      box-shadow: 0 4px 10px rgba(236, 72, 153, 0.3);
+      transition: var(--transition);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(236, 72, 153, 0.4);
+    }
+
+    /* --- COMMENTS --- */
     .comments-section {
-      background: #fcfcfc;
-      border-top: 1px solid #eee;
-      padding-top: 20px;
-      margin-top: 24px;
+      background: #f8fafc;
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      margin-top: 40px;
+      border: 1px solid #e2e8f0;
     }
 
     .comments-section textarea {
       width: 100%;
-      padding: 12px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      margin-bottom: 10px;
+      padding: 15px;
+      border: 2px solid #e2e8f0;
+      border-radius: var(--radius-md);
+      margin-bottom: 15px;
+      font-family: var(--font-body);
+      transition: border-color 0.2s;
+    }
+
+    .comments-section textarea:focus {
+      outline: none;
+      border-color: var(--secondary);
     }
 
     footer {
       text-align: center;
-      color: var(--muted);
+      padding: 40px;
+      color: var(--text-light);
       font-size: 0.9rem;
-      margin-top: 30px;
+      margin-top: auto;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="wrap">
-
-    <header class="site">
+  <header class="hero">
+    <div class="hero-content">
       <h1>Final Project: Language Acquisition</h1>
-    </header>
+      <span class="meta">Unit 1 – First Language Development</span>
 
-    <nav class="units">
-      <a href="index.html" class="unit-btn">Cover</a>
-      <a href="unidad1.html" class="unit-btn active">Unit 1</a>
-      <a href="unidad2.html" class="unit-btn">Unit 2</a>
-      <a href="unidad3.html" class="unit-btn">Unit 3</a>
-      <a href="unidad4.html" class="unit-btn">Unit 4</a>
-    </nav>
+      <nav class="units">
+        <a href="index.html" class="unit-btn">cover page</a>
+        <a href="unidad1.html" class="unit-btn active">Unit 1</a>
+        <a href="unidad2.html" class="unit-btn">Unit 2</a>
+        <a href="unidad3.html" class="unit-btn">Unit 3</a>
+        <a href="unidad4.html" class="unit-btn">Unit 4</a>
+      </nav>
+    </div>
+  </header>
 
-    <main class="card">
-      <h2 class="unit-title">UNIT 1 – First Language Development</h2>
-      <span class="meta">Theories, Stages, and The Role of Environment</span>
+  <div class="wrap">
+    <div class="main-card">
+
+      <!-- Hidden title for semantic structure if needed, but displayed in Hero -->
+      <h2 class="unit-title" style="display:none;">UNIT 1 – First Language Development</h2>
 
       <div class="grid">
 
@@ -316,66 +519,65 @@
           <div class="theory-item">
             <strong>Behaviorism — B. F. Skinner</strong>
             <p>Language is learned by imitating, repeating, and receiving reinforcement from the environment.
-              <strong>Stimulus →
-                Response → Reinforcement</strong>. Children copy adult speech and continue forms that receive positive
+              <strong>Stimulus → Response → Reinforcement</strong>. Children copy adult speech and continue forms that
+              receive positive
               feedback (praise, smiles, rewards).
             </p>
-            <p style="font-size:0.92rem; color:#d32f2f;"><em>Criticism: This theory cannot fully explain the creativity
-                of language — children produce novel sentences beyond direct imitation.</em></p>
+            <p style="font-size:0.9rem; color:#be185d; background:#fdf2f8; padding:8px; border-radius:8px;">
+              <em>Criticism: This theory cannot fully explain the creativity of language — children produce novel
+                sentences beyond direct imitation.</em>
+            </p>
           </div>
 
           <div class="theory-item">
             <strong>Innatism — Noam Chomsky</strong>
             <p>Humans are born with a Language Acquisition Device (LAD): a biological capacity to learn language.
               <strong>Language Acquisition Device (LAD)</strong> is a hypothetical mental faculty proposed by Noam
-              Chomsky that explains how children can learn and understand language so quickly.<strong>Universal
+              Chomsky that explains how children can learn and understand language so quickly. <strong>Universal
                 Grammar</strong>. Environmental input activates this biological capacity, which explains language
               development even with limited input.
             </p>
-            <p style="font-size:0.92rem;"><em>Evidence: Children's overgeneralizations (e.g., "I goed") indicate
-                internal rule formation rather than pure imitation.</em></p>
+            <p style="font-size:0.9rem; color:var(--text-muted);"><em>Evidence: Children's overgeneralizations (e.g., "I
+                goed") indicate internal rule formation rather than pure imitation.</em></p>
           </div>
 
           <div class="theory-item">
             <strong>Cognitivism — Jean Piaget</strong>
             <p>Language depends on cognitive development. Children speak when their thinking is ready. Cognitive stages
               (sensorimotor, preoperational, etc.) determine when certain linguistic structures can appear.</p>
-            <p style="font-size:0.92rem;"><em>Example: Knowledge of space is needed before using prepositions like
-                "under" or "behind".</em></p>
+            <p style="font-size:0.9rem; color:var(--text-muted);"><em>Example: Knowledge of space is needed before using
+                prepositions like "under" or "behind".</em></p>
           </div>
 
           <div class="theory-item">
             <strong>Interactionism — Bruner, Tomasello, Snow</strong>
-            <p>LLanguage is acquired through social interaction between the child and caregivers.<strong>child-directed
-                speech
-                (motherese)</strong> Linguistic input is adapted.<strong>Language Acquisition Support System
-                (LASS)</strong> that
-              scaffolds learning through routines, turn-taking, and joint attention.</p>
-            <p style="font-size:0.92rem;"><em>Key: Meaning arises in real communication and shared context (shared
-                intentionality).</em></p>
+            <p>Language is acquired through social interaction between the child and caregivers. <strong>Child-directed
+                speech (motherese)</strong>. Linguistic input is adapted. <strong>Language Acquisition Support System
+                (LASS)</strong> that scaffolds learning through routines, turn-taking, and joint attention.</p>
+            <p style="font-size:0.9rem; color:var(--text-muted);"><em>Key: Meaning arises in real communication and
+                shared context (shared intentionality).</em></p>
           </div>
 
           <div class="theory-item">
             <strong>Constructivism — Lev Vygotsky</strong>
             <p>Language is constructed through social interaction and guided learning inside the social environment
-              <strong>Zone of
-                Proximal Development (ZPD)</strong>. With scaffolding from a more capable person, children move
-              knowledge from social to internal use.
+              <strong>Zone of Proximal Development (ZPD)</strong>. With scaffolding from a more capable person, children
+              move knowledge from social to internal use.
             </p>
-            <p style="font-size:0.92rem;"><em>Example: A teacher prompts a child to describe an animal and the child
-                completes the description, internalizing the language.</em></p>
+            <p style="font-size:0.9rem; color:var(--text-muted);"><em>Example: A teacher prompts a child to describe an
+                animal and the child completes the description, internalizing the language.</em></p>
           </div>
 
           <h3>2. Stages of First Language Acquisition</h3>
 
-          <div class="stage-box" style="border-left-color: #4caf50;">
+          <div class="stage-box" style="border-left-color: #ec4899;">
             <h4>Prelinguistic Stage (0–12 months)</h4>
             <p><strong>Babbling:</strong> infants progress from crying and cooing to reduplicated babbling
               (<em>bababa</em>) and variegated babbling (<em>baga, mado</em>). Sounds begin to resemble the target
               language and the infant practices rhythm, intonation, and articulation.</p>
           </div>
 
-          <div class="stage-box" style="border-left-color: #8bc34a;">
+          <div class="stage-box" style="border-left-color: #d946ef;">
             <h4>One-word / Holophrastic Stage (12–18 months)</h4>
             <p>Children use single words to express whole ideas (e.g., <em>milk</em> meaning "I want milk"). Meaning
               relies on context. <strong>Overextensions</strong> (calling all animals "dog") and
@@ -383,14 +585,14 @@
             </p>
           </div>
 
-          <div class="stage-box" style="border-left-color: #cddc39;">
+          <div class="stage-box" style="border-left-color: #a855f7;">
             <h4>Two-word Stage (18–24 months)</h4>
             <p>Children combine two words showing basic grammatical relations: agent + action (<em>Mommy go</em>),
               action + object (<em>eat cookie</em>), possessor + object (<em>my toy</em>). Function words are typically
               absent; word order reflects the target language's syntax.</p>
           </div>
 
-          <div class="stage-box" style="border-left-color: #ffeb3b;">
+          <div class="stage-box" style="border-left-color: #8b5cf6;">
             <h4>Early Multiword / Complex Structures (24+ months)</h4>
             <p>Children produce longer sentences (3–5 words), use morphology (plural <em>-s</em>, past <em>-ed</em>,
               possessive <em>'s</em>), form questions and negations, and show pragmatic development (turn-taking, polite
@@ -399,9 +601,9 @@
           </div>
 
           <h3>3. The Role of the Environment</h3>
-          <div class="theory-item" style="background:#f0f7ff; border-color:#d0e3ff;">
+          <div class="theory-item" style="background:#f0f9ff; border-color:#bae6fd;">
             <p>The family is the child’s primary linguistic environment. Important factors:</p>
-            <ul style="padding-left:20px;">
+            <ul style="padding-left:20px; color:var(--text-main);">
               <li><strong>Quantity of input:</strong> More conversational interaction generally leads to larger
                 vocabulary and more complex grammar.</li>
               <li><strong>Quality of input:</strong> Rich vocabulary, explanations, and reading aloud stimulate stronger
@@ -422,26 +624,21 @@
             <h2>Suggested Videos</h2>
 
             <div class="video-list">
-
               <!-- Video 1 -->
               <div class="video-item">
-                <a href="https://www.youtube.com/watch?v=sYF5HefF6wA" target="_blank"
-                  style="text-decoration: none; color: inherit;">
-                  <img src="https://img.youtube.com/vi/sYF5HefF6wA/hqdefault.jpg" alt="Video 2 Thumbnail"
-                    style="width:100%; border-radius:10px;" />
-                  <p style="margin-top: 8px;">Vygotksy's Zone of Proximal Development</p>
+                <a href="https://www.youtube.com/watch?v=sYF5HefF6wA" target="_blank" style="text-decoration: none;">
+                  <img src="https://img.youtube.com/vi/sYF5HefF6wA/hqdefault.jpg" alt="Video 1 Thumbnail" />
+                  <p>Vygotksy's Zone of Proximal Development</p>
                 </a>
               </div>
 
-              <!-- Video 2 (thumbnail + link) -->
-
-
+              <!-- Video 2 -->
               <div class="video-item">
-                <a href="https://youtu.be/RUzMkLK4XbI" target="_blank" style="text-decoration: none; color: inherit;">
+                <a href="https://youtu.be/RUzMkLK4XbI" target="_blank" style="text-decoration: none;">
                   <img
                     src="https://i.ytimg.com/vi/RUzMkLK4XbI/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAeAI4QUdcDzcexVCJi-CO90tVfHQ"
-                    alt="Video 2 Thumbnail" style="width:100%; border-radius:10px;" />
-                  <p style="margin-top: 8px;">Scaffolding</p>
+                    alt="Video 2 Thumbnail" />
+                  <p>Scaffolding</p>
                 </a>
               </div>
             </div>
@@ -451,63 +648,62 @@
             <h2>Visual Ideas</h2>
 
             <div class="image-list">
-
               <div class="image-item">
                 <a href="https://www.verywellmind.com/thmb/E4chUERvNtqyl9NSvYE6GOmraFE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/what-is-observational-learning-2795402-5c018e9346e0fb0001e7c7d4.png"
                   target="_blank">
                   <img
                     src="https://www.verywellmind.com/thmb/E4chUERvNtqyl9NSvYE6GOmraFE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/what-is-observational-learning-2795402-5c018e9346e0fb0001e7c7d4.png"
-                    alt="Idea 1" style="width: 250px; border-radius: 10px;">
+                    alt="Observational Learning">
                 </a>
                 <p>Observational Learning</p>
               </div>
 
               <div class="image-item">
                 <a href="https://plato.stanford.edu/entries/innateness-language/foxp2.png" target="_blank">
-                  <img src="https://plato.stanford.edu/entries/innateness-language/foxp2.png" alt="Idea 1"
-                    style="width: 250px; border-radius: 10px;">
+                  <img src="https://plato.stanford.edu/entries/innateness-language/foxp2.png" alt="Innatism Diagram">
                 </a>
-                <p> Innatism Diagram Idea</p>
+                <p>Innatism Diagram Idea</p>
               </div>
 
-              <!-- Imagen 3 -->
               <div class="image-item">
                 <a href="https://impactofspecialneeds.weebly.com/uploads/3/4/1/9/3419723/9202520.jpg?420"
                   target="_blank">
                   <img src="https://impactofspecialneeds.weebly.com/uploads/3/4/1/9/3419723/9202520.jpg?420"
-                    alt="Idea 3" style="width: 250px; border-radius: 10px;">
+                    alt="Cognitivism">
                 </a>
-                <p>Cognitivism </p>
+                <p>Cognitivism</p>
               </div>
-              <!-- Imagen 4 -->
+
               <div class="image-item">
                 <a href="https://www.thoughtco.com/thmb/h4hy6enhpjBLAlFjsN28JkfBL18=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/TC_3026633-symbolic-interaction-theory-5b1166fb8e1b6e0036e3e383.png"
                   target="_blank">
                   <img
                     src="https://www.thoughtco.com/thmb/h4hy6enhpjBLAlFjsN28JkfBL18=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/TC_3026633-symbolic-interaction-theory-5b1166fb8e1b6e0036e3e383.png"
-                    alt="Idea 4" style="width: 250px; border-radius: 10px;">
+                    alt="Symbolic Interaction">
                 </a>
                 <p>Symbolic Interaction</p>
               </div>
-              <!-- Imagen 5 -->
+
               <div class="image-item">
                 <a href="https://www.simplypsychology.org/wp-content/uploads/ZPD-Scaffolding.jpg" target="_blank">
-                  <img src="https://www.simplypsychology.org/wp-content/uploads/ZPD-Scaffolding.jpg" alt="Idea 4"
-                    style="width: 250px; border-radius: 10px;">
+                  <img src="https://www.simplypsychology.org/wp-content/uploads/ZPD-Scaffolding.jpg"
+                    alt="Constructivism (ZPD)">
                 </a>
                 <p>Constructivism (ZPD)</p>
               </div>
-
             </div>
           </section>
 
-          <!-- Accordion: List of quizzes (open/close) -->
+          <!-- Accordion: List of quizzes -->
           <div class="accordion" id="quiz-list-accordion">
-            <div class="acc-head" data-target="quiz1">Quiz 1 — Theories (General)</div>
+            <div class="acc-head" data-target="quiz1">
+              <span>Quiz 1 — Theories (General)</span>
+              <span>▼</span>
+            </div>
             <div class="acc-body" id="quiz1">
-              <p style="margin:0 0 8px 0; font-size:0.95rem;">Quick check on main theoretical views.</p>
+              <p style="margin:0 0 15px 0; font-size:0.95rem; color:var(--text-muted);">Quick check on main theoretical
+                views.</p>
               <div class="quiz-container" data-quiz="1">
-                <h5>Quiz 1 — Theories (General)</h5>
 
                 <div class="question">
                   <p><strong>1.</strong> Behaviorism explains language as:</p>
@@ -561,30 +757,34 @@
                 </div>
 
                 <button class="btn-primary" onclick="checkQuiz(1)">Check Quiz 1</button>
-                <div id="result-1" style="margin-top:10px; font-weight:700; text-align:center;"></div>
+                <div id="result-1" style="margin-top:15px; font-weight:700; text-align:center;"></div>
               </div>
             </div>
+          </div>
 
+        </aside>
 
+      </div> <!-- End Grid -->
 
+      <!-- COMMENTS -->
+      <div class="comments-section">
+        <h3>💬 Discussion Board</h3>
+        <div id="comments-list" style="margin-bottom: 20px; color: var(--text-muted); font-size: 0.95rem;">
+          <em>No comments yet. Be the first!</em>
+        </div>
+        <textarea id="comment-text" rows="3"
+          placeholder="Share your thoughts on First Language Acquisition..."></textarea>
+        <button class="btn-primary" style="width: auto; padding: 10px 30px;" onclick="postComment()">Post
+          Comment</button>
+      </div>
 
-            <div class="comments-section">
-              <h3>💬 Discussion Board</h3>
-              <div id="comments-list" style="margin-bottom: 15px; color: #555; font-size: 0.9rem;">
-                <em>No comments yet. Be the first!</em>
-              </div>
-              <textarea id="comment-text" rows="3"
-                placeholder="Share your thoughts on First Language Acquisition..."></textarea>
-              <button class="btn-primary" style="width: auto;" onclick="postComment()">Post Comment</button>
-            </div>
-
-    </main>
+    </div> <!-- End Main Card -->
 
     <footer>
       <p>Final Project 2025 - First Language Acquisition</p>
     </footer>
 
-  </div>
+  </div> <!-- End Wrap -->
 
   <script>
     /* Accordion behavior for quiz list */
@@ -606,8 +806,7 @@
       });
     });
 
-    /* QUIZ CHECKER: checks one quiz at a time based only on the quiz ID.
-       Answers are set according to the corrected material (from supplied content). */
+    /* QUIZ CHECKER: checks one quiz at a time based only on the quiz ID. */
     function checkQuiz(id) {
       let score = 0;
       let total = 0;
@@ -623,49 +822,11 @@
         if (document.querySelector('input[name="q1_5"]:checked')?.value === 'b') score++;
       }
 
-      if (id === 2) {
-        // Quiz 2 correct: q2_1=c, q2_2=b, q2_3=c, q2_4=b, q2_5=a
-        total = 5;
-        if (document.querySelector('input[name="q2_1"]:checked')?.value === 'c') score++;
-        if (document.querySelector('input[name="q2_2"]:checked')?.value === 'b') score++;
-        if (document.querySelector('input[name="q2_3"]:checked')?.value === 'c') score++;
-        if (document.querySelector('input[name="q2_4"]:checked')?.value === 'b') score++;
-        if (document.querySelector('input[name="q2_5"]:checked')?.value === 'a') score++;
-      }
-
-      if (id === 3) {
-        // Quiz 3 correct: q3_1=c, q3_2=b, q3_3=b, q3_4=b, q3_5=b
-        total = 5;
-        if (document.querySelector('input[name="q3_1"]:checked')?.value === 'c') score++;
-        if (document.querySelector('input[name="q3_2"]:checked')?.value === 'b') score++;
-        if (document.querySelector('input[name="q3_3"]:checked')?.value === 'b') score++;
-        if (document.querySelector('input[name="q3_4"]:checked')?.value === 'b') score++;
-        if (document.querySelector('input[name="q3_5"]:checked')?.value === 'b') score++;
-      }
-
-      if (id === 4) {
-        // Quiz 4 correct: q4_1=b, q4_2=b, q4_3=b, q4_4=b, q4_5=c
-        total = 5;
-        if (document.querySelector('input[name="q4_1"]:checked')?.value === 'b') score++;
-        if (document.querySelector('input[name="q4_2"]:checked')?.value === 'b') score++;
-        if (document.querySelector('input[name="q4_3"]:checked')?.value === 'b') score++;
-        if (document.querySelector('input[name="q4_4"]:checked')?.value === 'b') score++;
-        if (document.querySelector('input[name="q4_5"]:checked')?.value === 'c') score++;
-      }
-
-      if (id === 5) {
-        // Quiz 5 correct: q5_1=b, q5_2=c, q5_3=b, q5_4=b, q5_5=c
-        total = 5;
-        if (document.querySelector('input[name="q5_1"]:checked')?.value === 'b') score++;
-        if (document.querySelector('input[name="q5_2"]:checked')?.value === 'c') score++;
-        if (document.querySelector('input[name="q5_3"]:checked')?.value === 'b') score++;
-        if (document.querySelector('input[name="q5_4"]:checked')?.value === 'b') score++;
-        if (document.querySelector('input[name="q5_5"]:checked')?.value === 'c') score++;
-      }
+      // Placeholders for other quizzes if they were added back
 
       if (!resultEl) return;
       resultEl.innerText = "You got " + score + " / " + total + " correct.";
-      resultEl.style.color = (score === total) ? 'green' : (score >= Math.ceil(total * 0.6)) ? 'orange' : 'crimson';
+      resultEl.style.color = (score === total) ? 'var(--secondary)' : (score >= Math.ceil(total * 0.6)) ? 'orange' : '#ef4444';
     }
 
     // COMMENTS LOGIC
@@ -676,11 +837,11 @@
       if (list.innerHTML.includes("No comments")) list.innerHTML = "";
       let newComment = document.createElement("div");
       newComment.style.borderBottom = "1px solid #eee";
-      newComment.style.padding = "10px 0";
+      newComment.style.padding = "15px 0";
       // Add timestamp briefly
       const now = new Date();
       const ts = now.toLocaleString();
-      newComment.innerHTML = "<strong>Student (" + ts + "):</strong> " + escapeHtml(text);
+      newComment.innerHTML = "<strong style='color:var(--primary);'>Student (" + ts + "):</strong> " + escapeHtml(text);
       list.appendChild(newComment);
       document.getElementById('comment-text').value = "";
     }

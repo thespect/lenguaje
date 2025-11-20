@@ -1,247 +1,671 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Unit 3 - Factors in SLA</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+
   <style>
-    /* --- PRO DESIGN STYLES --- */
-    :root{
-      --maxw: 1000px;
-      --accent1: #2b7cff;
-      --accent2: #8e44ad; /* Purple for Unit 3 */
-      --muted:#666;
-      --card-bg:#fff;
-      --bg:#f7f8fb;
-      --radius:10px;
-      --shadow: 0 6px 18px rgba(20,20,40,0.06);
-    }
-    *{box-sizing:border-box}
-    body{
-      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      margin:0; background:var(--bg); color:#333; line-height: 1.6;
-    }
-    .wrap{max-width:var(--maxw);margin:28px auto;padding:20px;}
-    
-    /* NAV */
-    header.site{ margin-bottom:20px; text-align: center; }
-    nav.units{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:20px; justify-content: center; }
-    .unit-btn{
-      text-decoration: none; padding:10px 16px; border-radius:8px; background:#fff; border:1px solid #eee;
-      color: #444; font-weight:600; transition: all 0.2s ease;
-    }
-    .unit-btn:hover{ background: #f9f9f9; transform: translateY(-2px); }
-    .unit-btn.active{ background:var(--accent2); color:#fff; border-color:var(--accent2); box-shadow: 0 4px 12px rgba(142, 68, 173, 0.3); }
+    /* --- PINK & BLUE THEME (PREMIUM) --- */
+    :root {
+      /* Pink & Blue Palette */
+      --primary: #ec4899;
+      /* Pink 500 */
+      --primary-dark: #be185d;
+      /* Pink 700 */
+      --secondary: #3b82f6;
+      /* Blue 500 */
+      --secondary-dark: #1d4ed8;
+      /* Blue 700 */
+      --accent: #8b5cf6;
+      /* Violet 500 (Bridge color) */
 
-    /* CONTENT */
-    .card{ background:var(--card-bg); border-radius:var(--radius); padding:30px; box-shadow:var(--shadow); margin-bottom:24px; }
-    .grid{ display:grid; grid-template-columns: 2fr 1fr; gap:30px; }
-    
-    h2.unit-title{ color:var(--accent2); border-bottom: 2px solid #eee; padding-bottom: 15px; margin-top: 0; }
-    h3 { color: #2c3e50; margin-top: 40px; border-left: 5px solid var(--accent2); padding-left: 15px; font-size: 1.4rem; }
-    h4 { color: var(--accent2); margin-top: 25px; margin-bottom: 10px; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.5px; }
-    
-    /* LISTS & BOXES */
-    ul, ol { padding-left: 20px; margin-bottom: 15px; }
-    li { margin-bottom: 8px; }
-    .factor-item { margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px dashed #eee; }
-    
-    /* VIDEO */
+      --bg-body: #fdf4ff;
+      /* Very light pink/blue tint */
+      --bg-card: #ffffff;
+
+      --text-main: #1e293b;
+      /* Slate 800 */
+      --text-muted: #64748b;
+      /* Slate 500 */
+      --text-light: #94a3b8;
+
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* --- HERO SECTION --- */
+    header.hero {
+      background: linear-gradient(135deg, #be185d 0%, #1e3a8a 100%);
+      position: relative;
+      padding: 120px 20px 160px;
+      text-align: center;
+      color: white;
+      overflow: hidden;
+      margin-bottom: -80px;
+      /* Overlap effect */
+    }
+
+    /* Abstract Shapes */
+    header.hero::before,
+    header.hero::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.5;
+      z-index: 0;
+    }
+
+    header.hero::before {
+      width: 300px;
+      height: 300px;
+      background: var(--primary);
+      top: -50px;
+      left: -50px;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    header.hero::after {
+      width: 400px;
+      height: 400px;
+      background: var(--secondary);
+      bottom: -50px;
+      right: -50px;
+      animation: float 12s ease-in-out infinite reverse;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translate(0, 0);
+      }
+
+      50% {
+        transform: translate(20px, 40px);
+      }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      margin-bottom: 10px;
+      background: linear-gradient(to right, #fff, #fbcfe8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero .meta {
+      font-size: 1.2rem;
+      color: #e2e8f0;
+      font-weight: 300;
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 5px 15px;
+      border-radius: 50px;
+      backdrop-filter: blur(5px);
+    }
+
+    /* --- NAVIGATION --- */
+    nav.units {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 20px;
+      position: relative;
+      z-index: 20;
+    }
+
+    .unit-btn {
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: var(--transition);
+      backdrop-filter: blur(5px);
+    }
+
+    .unit-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .unit-btn.active {
+      background: white;
+      color: var(--primary);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    /* --- MAIN LAYOUT --- */
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+      position: relative;
+      z-index: 20;
+      flex: 1;
+    }
+
+    .main-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: var(--shadow-xl);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .main-card {
+        padding: 25px;
+      }
+    }
+
+    /* --- TYPOGRAPHY & CONTENT --- */
+    h2.unit-title {
+      font-family: var(--font-heading);
+      color: var(--primary-dark);
+      font-size: 2rem;
+      margin-bottom: 10px;
+      display: none;
+      /* Hidden because it's in Hero now */
+    }
+
+    h3 {
+      font-family: var(--font-heading);
+      color: var(--secondary-dark);
+      font-size: 1.5rem;
+      margin: 30px 0 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h3::before {
+      content: '';
+      display: block;
+      width: 8px;
+      height: 24px;
+      background: var(--secondary);
+      border-radius: 4px;
+    }
+
+    h4 {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      color: var(--primary);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    p {
+      margin-bottom: 15px;
+      color: var(--text-muted);
+    }
+
+    ul,
+    ol {
+      margin-bottom: 20px;
+      padding-left: 25px;
+      color: var(--text-muted);
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .factor-item {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      padding: 25px;
+      border-radius: var(--radius-md);
+      margin-bottom: 25px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .factor-item:hover {
+      border-color: var(--primary);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .factor-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--primary), var(--secondary));
+    }
+
+    /* --- SIDEBAR --- */
+    aside h2 {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      color: var(--text-main);
+      margin-bottom: 15px;
+      border-bottom: 2px solid #f1f5f9;
+      padding-bottom: 10px;
+    }
+
     .video-container {
-        position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; margin-top: 10px; background: #000;
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      background: #000;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-md);
     }
-    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
-    /* QUIZ STYLES */
-    .quiz-container { background: #fff; border: 2px solid #f3e5f5; border-radius: 10px; padding: 30px; margin-top: 40px; }
-    .quiz-question { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
-    .quiz-question p { font-weight: bold; margin-bottom: 10px; }
-    .quiz-options label { display: block; padding: 8px; cursor: pointer; }
-    .quiz-options label:hover { background: #f9f9f9; }
-    .btn-quiz { background: var(--accent2); color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; }
-    
-    /* Visual Ideas Box */
-    .visual-box { background: #fcf0ff; border: 1px solid #f3d0ff; padding: 15px; border-radius: 8px; font-size: 0.9rem; color: #555; margin-top: 10px; }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
 
-    @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
-    footer { text-align: center; color: var(--muted); font-size: 0.9rem; margin-top: 40px; }
+    .video-item,
+    .image-item {
+      margin-bottom: 20px;
+      transition: var(--transition);
+    }
+
+    .video-item:hover,
+    .image-item:hover {
+      transform: scale(1.02);
+    }
+
+    .video-item img,
+    .image-item img {
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      width: 100%;
+      display: block;
+    }
+
+    .video-item p,
+    .image-item p {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-top: 8px;
+      color: var(--text-main);
+      text-align: center;
+    }
+
+    /* --- QUIZ --- */
+    .quiz-container {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      margin-top: 40px;
+    }
+
+    .quiz-question {
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px dashed #e2e8f0;
+    }
+
+    .quiz-question p {
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+
+    .quiz-options label {
+      display: block;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+      border: 1px solid transparent;
+    }
+
+    .quiz-options label:hover {
+      background: #f0f9ff;
+      border-color: #bae6fd;
+    }
+
+    .quiz-options input {
+      margin-right: 10px;
+      accent-color: var(--primary);
+    }
+
+    .btn-quiz {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      width: 100%;
+      margin-top: 10px;
+      font-family: var(--font-heading);
+      box-shadow: 0 4px 10px rgba(236, 72, 153, 0.3);
+      transition: var(--transition);
+    }
+
+    .btn-quiz:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(236, 72, 153, 0.4);
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-top: auto;
+    }
   </style>
 </head>
+
 <body>
 
-<div class="wrap">
-  
-  <header class="site">
-    <h1>Final Project: Language Acquisition</h1>
+  <header class="hero">
+    <div class="hero-content">
+      <h1>Final Project: Language Acquisition</h1>
+      <span class="meta">Unit 3 – Factors in Second Language Acquisition</span>
+
+      <nav class="units">
+        <a href="index.html" class="unit-btn">cover page</a>
+        <a href="unidad1.html" class="unit-btn">Unit 1</a>
+        <a href="unidad2.html" class="unit-btn">Unit 2</a>
+        <a href="unidad3.html" class="unit-btn active">Unit 3</a>
+        <a href="unidad4.html" class="unit-btn">Unit 4</a>
+      </nav>
+    </div>
   </header>
 
-  <nav class="units">
-    <a href="index.html" class="unit-btn">Cover</a>
-    <a href="unidad1.html" class="unit-btn">Unit 1</a>
-    <a href="unidad2.html" class="unit-btn">Unit 2</a>
-    <a href="unidad3.html" class="unit-btn active">Unit 3</a>
-    <a href="unidad4.html" class="unit-btn">Unit 4</a>
-  </nav>
+  <div class="wrap">
+    <div class="main-card">
 
-  <main class="card">
-    <h2 class="unit-title">UNIT 3 – Factors in Second Language Acquisition</h2>
+      <h2 class="unit-title" style="display:none;">UNIT 3 – Factors in Second Language Acquisition</h2>
 
-    <div class="grid">
-      <div class="content">
-        
-        <h3>3.1 INTERNAL FACTORS</h3>
-        
-        <div class="factor-item">
+      <div class="grid">
+
+        <!-- LEFT: CONTENT -->
+        <div class="content">
+
+          <h3>3.1 INTERNAL FACTORS</h3>
+
+          <div class="factor-item">
             <h4>1. Age</h4>
             <ul>
-                <li>Age influences how you learn, not whether you can learn.</li>
-                [cite_start]<li><strong>Children:</strong> better pronunciation and naturalness; they learn unconsciously[cite: 259].</li>
-                [cite_start]<li><strong>Adolescents and adults:</strong> learn vocabulary and grammar faster due to greater cognitive ability[cite: 260].</li>
+              <li>Age influences how you learn, not whether you can learn.</li>
+              <li><strong>Children:</strong> better pronunciation and naturalness; they learn unconsciously.</li>
+              <li><strong>Adolescents and adults:</strong> learn vocabulary and grammar faster due to greater cognitive
+                ability.</li>
             </ul>
-            <div class="visual-box">🖼️ <strong>Image Idea:</strong> Timeline showing Child (Pronunciation) vs Adult (Grammar).</div>
-        </div>
+          </div>
 
-        <div class="factor-item">
+          <div class="factor-item">
             <h4>2. Aptitude (Language ability)</h4>
-            <p>The natural ability to learn languages. Includes sensitivity to sounds and grammatical patterns. [cite_start]People with high aptitude learn faster even with little exposure [cite: 261-267].</p>
-        </div>
+            <p>The natural ability to learn languages. Includes sensitivity to sounds and grammatical patterns. People
+              with high aptitude learn faster even with little exposure.</p>
+          </div>
 
-        <div class="factor-item">
+          <div class="factor-item">
             <h4>3. Motivation</h4>
             <p>One of the most decisive factors. High motivation = more persistence and success.</p>
             <ul>
-                <li><strong>Integrative:</strong> Wanting to connect with culture/people.</li>
-                [cite_start]<li><strong>Instrumental:</strong> Learning for a goal (work, school) [cite: 270-271].</li>
+              <li><strong>Integrative:</strong> Wanting to connect with culture/people.</li>
+              <li><strong>Instrumental:</strong> Learning for a goal (work, school).</li>
             </ul>
-        </div>
+          </div>
 
-        <div class="factor-item">
+          <div class="factor-item">
             <h4>4. Attitudes</h4>
-            <p>Positive attitudes reduce anxiety and increase willingness to speak. [cite_start]Negative attitudes cause resistance [cite: 274-276].</p>
-        </div>
+            <p>Positive attitudes reduce anxiety and increase willingness to speak. Negative attitudes cause resistance.
+            </p>
+          </div>
 
-        <div class="factor-item">
+          <div class="factor-item">
             <h4>5. Learning Styles</h4>
             <p>Preferences for processing information:</p>
             <ul>
-                <li><strong>Visual:</strong> Images, reading.</li>
-                <li><strong>Auditory:</strong> Listening, songs.</li>
-                <li><strong>Kinesthetic:</strong> Moving, acting.</li>
-                <li><strong>Analytical:</strong> Rules, grammar.</li>
-                [cite_start]<li><strong>Global:</strong> Meaning, communication [cite: 281-285].</li>
+              <li><strong>Visual:</strong> Images, reading.</li>
+              <li><strong>Auditory:</strong> Listening, songs.</li>
+              <li><strong>Kinesthetic:</strong> Moving, acting.</li>
+              <li><strong>Analytical:</strong> Rules, grammar.</li>
+              <li><strong>Global:</strong> Meaning, communication.</li>
             </ul>
-        </div>
-
-        <h3>3.2 EXTERNAL FACTORS</h3>
-
-        <div class="factor-item">
-            <h4>1. Learning Context & Instruction</h4>
-            <p>Includes home, school, and immersion environments. [cite_start]Clear objectives and meaningful activities are key [cite: 327-337].</p>
-        </div>
-
-        <div class="factor-item">
-            <h4>2. Input & Opportunities</h4>
-            <p>Input must be <strong>Comprehensible (i+1)</strong>: slightly above the learner's level. [cite_start]Students need opportunities to use the language (Role plays, games) [cite: 340-349].</p>
-        </div>
-
-      </div>
-
-      <aside>
-        <div style="background:#fff; border:1px solid #ddd; padding:15px; border-radius:8px;">
-          <h4>🎥 Suggested Video</h4>
-          <p><strong>Topic:</strong> Learning Styles & Motivation</p>
-          <div class="video-container">
-             <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
           </div>
-          <p style="font-size:0.8rem; color:#666; margin-top:5px;">Understanding how personality affects learning.</p>
+
+          <h3>3.2 EXTERNAL FACTORS</h3>
+
+          <div class="factor-item">
+            <h4>1. Learning Context & Instruction</h4>
+            <p>Includes home, school, and immersion environments. Clear objectives and meaningful activities are key.
+            </p>
+          </div>
+
+          <div class="factor-item">
+            <h4>2. Input & Opportunities</h4>
+            <p>Input must be <strong>Comprehensible (i+1)</strong>: slightly above the learner's level. Students need
+              opportunities to use the language (Role plays, games).</p>
+          </div>
+
         </div>
 
-        <div class="visual-box" style="margin-top:20px;">
-          <h4>🧠 Visuals to include</h4>
-          <ul style="padding-left:15px;">
-             <li>Brain with gears (Aptitude).</li>
-             <li>Heart vs Tool (Integrative vs Instrumental).</li>
-             <li>Icons: Ear, Eye, Hand (Styles).</li>
-          </ul>
-        </div>
-      </aside>
-    </div>
+        <!-- RIGHT: SIDEBAR -->
+        <aside>
+          <section class="suggested-videos">
+            <h2>Suggested Videos</h2>
 
-    <div class="quiz-container">
-        <h3 style="margin-top:0; color:var(--accent2);">📝 Unit 3 Quiz: Test Your Knowledge</h3>
-        
+            <div class="video-list">
+              <!-- Video 1 -->
+              <div class="video-item">
+                <a href="https://www.youtube.com/watch?v=VvOIbDI2fro&t=92sa" target="_blank"
+                  style="text-decoration: none;">
+                  <img
+                    src="https://i.ytimg.com/vi/VvOIbDI2fro/sddefault.jpg?sqp=-oaymwEmCIAFEOAD8quKqQMa8AEB-AH-BIAC6AKKAgwIABABGEogVyhlMA8=&rs=AOn4CLAB0tJw3hq1qhSf0Ngu8NSIqoiLRw"
+                    alt="Video 1 Thumbnail" />
+                  <p>Theory of Second Language Acquisition</p>
+                </a>
+              </div>
+
+
+              <section class="visual-ideas">
+                <h2>Visual Ideas</h2>
+
+                <div class="image-list">
+                  <div class="image-item">
+                    <a href="https://img.freepik.com/vector-gratis/evolucion-edad-humana-sobre-fondo-blanco-nino-viejo-todas-etapas-madurez-hombres-mujeres_613284-194.jpg?semt=ais_hybrid&w=740&q=80"
+                      target="_blank">
+                      <img
+                        src="https://img.freepik.com/vector-gratis/evolucion-edad-humana-sobre-fondo-blanco-nino-viejo-todas-etapas-madurez-hombres-mujeres_613284-194.jpg?semt=ais_hybrid&w=740&q=80"
+                        alt="Age">
+                    </a>
+                    <p>Age</p>
+                  </div>
+                  <div class="image-list">
+                    <div class="image-item">
+                      <a href="https://img.freepik.com/foto-gratis/personas-plano-medio-que-estudian-cuadernos_23-2149204778.jpg?semt=ais_hybrid&w=740&q=80"
+                        target="_blank">
+                        <img
+                          src="https://img.freepik.com/foto-gratis/personas-plano-medio-que-estudian-cuadernos_23-2149204778.jpg?semt=ais_hybrid&w=740&q=80"
+                          alt="i+1 Diagram">
+                      </a>
+                      <p>different ages same learning</p>
+                    </div>
+                    <div class="image-item">
+                      <a href="https://previews.123rf.com/images/jemastock/jemastock1704/jemastock170412179/76884185-the-mind-bulb-brain-gears-idea-intelligence-design-vector-illustration.jpg"
+                        target="_blank">
+                        <img
+                          src="https://previews.123rf.com/images/jemastock/jemastock1704/jemastock170412179/76884185-the-mind-bulb-brain-gears-idea-intelligence-design-vector-illustration.jpg"
+                          alt="i+1 Diagram">
+                      </a>
+                      <p>brain</p>
+                    </div>
+                    <div class="image-item">
+                      <a href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6jENMv1gibrU52SD7BvzGkFrQHvAwGaT8iw&s"
+                        target="_blank">
+                        <img
+                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6jENMv1gibrU52SD7BvzGkFrQHvAwGaT8iw&s"
+                          alt="i+1 Diagram">
+                      </a>
+                      <p>remember</p>
+                    </div>
+
+
+                  </div>
+              </section>
+        </aside>
+
+      </div> <!-- End Grid -->
+
+      <!-- QUIZ -->
+      <div class="quiz-container">
+        <h3 style="border:none; padding:0; margin-top:0; color:var(--secondary);">📝 Unit 3 Quiz: Test Your Knowledge
+        </h3>
+
         <div class="quiz-question">
-            <p>1. Which group typically acquires vocabulary and grammar faster?</p>
-            <div class="quiz-options">
-                <label><input type="radio" name="q1" value="a"> Children</label>
-                <label><input type="radio" name="q1" value="b"> Adults [Correct]</label>
-                <label><input type="radio" name="q1" value="c"> Babies</label>
-            </div>
+          <p>1. Which group typically acquires vocabulary and grammar faster?</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q1" value="a"> Children</label>
+            <label><input type="radio" name="q1" value="b"> Adults</label>
+            <label><input type="radio" name="q1" value="c"> Babies</label>
+          </div>
         </div>
 
         <div class="quiz-question">
-            <p>2. Learning a language to get a better job is an example of:</p>
-            <div class="quiz-options">
-                <label><input type="radio" name="q2" value="a"> Integrative Motivation</label>
-                <label><input type="radio" name="q2" value="b"> Instrumental Motivation [Correct]</label>
-                <label><input type="radio" name="q2" value="c"> No Motivation</label>
-            </div>
+          <p>2. Learning a language to get a better job is an example of:</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q2" value="a"> Integrative Motivation</label>
+            <label><input type="radio" name="q2" value="b"> Instrumental Motivation</label>
+            <label><input type="radio" name="q2" value="c"> No Motivation</label>
+          </div>
         </div>
 
         <div class="quiz-question">
-            <p>3. A "Kinesthetic" learner learns best by:</p>
-            <div class="quiz-options">
-                <label><input type="radio" name="q3" value="a"> Moving and acting [Correct]</label>
-                <label><input type="radio" name="q3" value="b"> Reading books</label>
-                <label><input type="radio" name="q3" value="c"> Listening to podcasts</label>
-            </div>
+          <p>3. A "Kinesthetic" learner learns best by:</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q3" value="a"> Moving and acting</label>
+            <label><input type="radio" name="q3" value="b"> Reading books</label>
+            <label><input type="radio" name="q3" value="c"> Listening to podcasts</label>
+          </div>
         </div>
 
         <div class="quiz-question">
-            <p>4. What does "Comprehensible Input (i+1)" mean?</p>
-            <div class="quiz-options">
-                <label><input type="radio" name="q4" value="a"> Language that is impossible to understand</label>
-                <label><input type="radio" name="q4" value="b"> Language slightly above the learner's current level [Correct]</label>
-                <label><input type="radio" name="q4" value="c"> Language exactly at the learner's level</label>
-            </div>
+          <p>4. What does "Comprehensible Input (i+1)" mean?</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q4" value="a"> Language that is impossible to understand</label>
+            <label><input type="radio" name="q4" value="b"> Language slightly above the learner's current level</label>
+            <label><input type="radio" name="q4" value="c"> Language exactly at the learner's level</label>
+          </div>
         </div>
 
         <div class="quiz-question">
-            <p>5. "Aptitude" refers to:</p>
-            <div class="quiz-options">
-                <label><input type="radio" name="q5" value="a"> How much you like the teacher</label>
-                <label><input type="radio" name="q5" value="b"> The environment of the classroom</label>
-                <label><input type="radio" name="q5" value="c"> Natural ability to detect patterns and sounds [Correct]</label>
-            </div>
+          <p>5. "Aptitude" refers to:</p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q5" value="a"> How much you like the teacher</label>
+            <label><input type="radio" name="q5" value="b"> The environment of the classroom</label>
+            <label><input type="radio" name="q5" value="c"> Natural ability to detect patterns and sounds</label>
+          </div>
         </div>
 
         <button class="btn-quiz" onclick="checkQuiz()">Check Answers</button>
-        <div id="result" style="margin-top:15px; font-weight:bold;"></div>
-    </div>
+        <div id="result" style="margin-top:15px; font-weight:bold; text-align:center;"></div>
+      </div>
 
-  </main>
-  
-  <footer>
-    <p>Final Project 2025 - Language Acquisition</p>
-  </footer>
+    </div> <!-- End Main Card -->
 
-</div>
+    <footer>
+      <p>Final Project 2025 - Language Acquisition</p>
+    </footer>
 
-<script>
-  function checkQuiz() {
-    let score = 0;
-    // Answers: 1=b, 2=b, 3=a, 4=b, 5=c
-    if(document.querySelector('input[name="q1"]:checked')?.value === 'b') score++;
-    if(document.querySelector('input[name="q2"]:checked')?.value === 'b') score++;
-    if(document.querySelector('input[name="q3"]:checked')?.value === 'a') score++;
-    if(document.querySelector('input[name="q4"]:checked')?.value === 'b') score++;
-    if(document.querySelector('input[name="q5"]:checked')?.value === 'c') score++;
+  </div> <!-- End Wrap -->
 
-    let msg = document.getElementById('result');
-    msg.innerText = `You got ${score} out of 5 correct!`;
-    msg.style.color = score >= 4 ? 'green' : 'orange';
-  }
-</script>
+  <script>
+    function checkQuiz() {
+      let score = 0;
+      // Answers: 1=b, 2=b, 3=a, 4=b, 5=c
+      if (document.querySelector('input[name="q1"]:checked')?.value === 'b') score++;
+      if (document.querySelector('input[name="q2"]:checked')?.value === 'b') score++;
+      if (document.querySelector('input[name="q3"]:checked')?.value === 'a') score++;
+      if (document.querySelector('input[name="q4"]:checked')?.value === 'b') score++;
+      if (document.querySelector('input[name="q5"]:checked')?.value === 'c') score++;
+
+      let msg = document.getElementById('result');
+      msg.innerText = `You got ${score} out of 5 correct!`;
+      msg.style.color = score >= 4 ? 'var(--secondary)' : '#ef4444';
+    }
+  </script>
 
 </body>
+
 </html>

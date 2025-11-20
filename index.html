@@ -16,25 +16,25 @@
   <style>
     /* --- PREMIUM DESIGN SYSTEM --- */
     :root {
-      --primary: #4f46e5;
-      /* Indigo 600 */
-      --primary-dark: #4338ca;
-      /* Indigo 700 */
-      --secondary: #8b5cf6;
-      /* Violet 500 */
-      --accent: #06b6d4;
-      /* Cyan 500 */
+      --primary: #3b82f6;
+      /* Azul vibrante */
+      --primary-dark: #2563eb;
+      /* Azul más oscuro */
+      --secondary: #ec4899;
+      /* Rosa vibrante */
+      --accent: #8b5cf6;
+      /* Púrpura para acentos */
 
       --bg-body: #f8fafc;
-      /* Slate 50 */
+      /* Fondo claro */
       --bg-card: #ffffff;
 
       --text-main: #0f172a;
-      /* Slate 900 */
+      /* Texto principal oscuro */
       --text-muted: #64748b;
-      /* Slate 500 */
+      /* Texto secundario */
       --text-light: #94a3b8;
-      /* Slate 400 */
+      /* Texto claro */
 
       --radius-lg: 24px;
       --radius-md: 16px;
@@ -44,7 +44,7 @@
       --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
       --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
       --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-      --shadow-glow: 0 0 40px rgba(79, 70, 229, 0.15);
+      --shadow-glow: 0 0 40px rgba(59, 130, 246, 0.15);
 
       --font-heading: 'Outfit', sans-serif;
       --font-body: 'Inter', sans-serif;
@@ -71,7 +71,7 @@
 
     /* --- HERO SECTION --- */
     header.hero {
-      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+      background: linear-gradient(135deg, #1e3a8a 0%, #831843 100%);
       position: relative;
       padding: 140px 20px 180px;
       text-align: center;
@@ -134,7 +134,7 @@
       font-weight: 800;
       line-height: 1.1;
       margin-bottom: 1rem;
-      background: linear-gradient(to right, #fff, #a5b4fc);
+      background: linear-gradient(to right, #ffffff, #f0abfc);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -158,7 +158,7 @@
       font-size: 0.9rem;
       text-transform: uppercase;
       letter-spacing: 2px;
-      color: #94a3b8;
+      color: #c7d2fe;
       font-weight: 600;
     }
 
@@ -208,7 +208,7 @@
       letter-spacing: 1.5px;
       color: var(--primary);
       margin-bottom: 20px;
-      background: #e0e7ff;
+      background: #dbeafe;
       padding: 6px 16px;
       border-radius: 100px;
     }
@@ -261,10 +261,26 @@
       overflow: hidden;
     }
 
+    .nav-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
     .nav-card:hover {
       transform: translateY(-8px);
       box-shadow: var(--shadow-lg);
       border-color: var(--primary);
+    }
+
+    .nav-card:hover::before {
+      transform: scaleX(1);
     }
 
     .nav-icon {
@@ -304,14 +320,31 @@
       font-family: var(--font-heading);
       font-weight: 600;
       font-size: 1.1rem;
-      box-shadow: 0 10px 20px -5px rgba(79, 70, 229, 0.4);
+      box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.4);
       transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-start::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
     }
 
     .btn-start:hover {
       transform: translateY(-3px);
-      box-shadow: 0 15px 30px -5px rgba(79, 70, 229, 0.5);
+      box-shadow: 0 15px 30px -5px rgba(59, 130, 246, 0.5);
       filter: brightness(1.1);
+    }
+
+    .btn-start:hover::before {
+      left: 100%;
     }
 
     /* --- AUTHOR SECTION --- */
@@ -327,7 +360,7 @@
     .author-avatar {
       width: 64px;
       height: 64px;
-      background: linear-gradient(135deg, var(--text-main), var(--primary));
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
       color: white;
       border-radius: 50%;
       display: flex;
