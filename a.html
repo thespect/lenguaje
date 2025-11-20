@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Videos</title>
+
+    <style>
+        body {
+            background: #111;
+            color: #fff;
+            font-family: Arial;
+            padding: 20px;
+        }
+
+        .suggested-videos {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .video-list {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .video-item {
+            width: 360px;
+        }
+
+        .video-item iframe {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="suggested-videos">
+        <h2>Suggested Videos</h2>
+
+        <div class="video-list">
+
+            <!-- Video 1 -->
+            <div class="video-item">
+                <iframe src="https://www.youtube-nocookie.com/embed/RUzMkLK4XbI" title="Video 1" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+                </iframe>
+                <p>Video Title 1</p>
+            </div>
+
+            <!-- Video 2 -->
+            <div class="video-item">
+                <iframe src="https://www.youtube-nocookie.com/embed/sYF5HefF6wA" title="Video 2" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+                </iframe>
+                <p>Video Title 2</p>
+            </div>
+
+        </div>
+    </section>
+</body>
+
+</html>
